@@ -1,13 +1,15 @@
 /* eslint-disable no-useless-constructor */
 import React from 'react';
 import Header from './header';
-import ProductListItem from './product-list-item';
+import ProductList from './product-list';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { products: [] };
-    this.getProducts = this.getProducts.bind(this);
+  }
+  componentDidMount() {
+    this.getProducts();
   }
   getProducts() {
     fetch('/api/products.php')
@@ -15,14 +17,12 @@ export default class App extends React.Component {
       .then(products => this.setState({ products }))
       .catch(error => console.error(error));
   }
-  componentDidMount() {
-    this.getProducts();
-  }
+
   render() {
     return (
       <div>
         <Header/>
-        <ProductListItem productsFromApi={this.state.products}/>
+        <ProductList productsFromApi={this.state.products}/>
       </div>
     );
 
