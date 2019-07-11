@@ -12,9 +12,6 @@ class Header extends React.Component {
                 <p className="text-muted">This is Amazon but smaller</p>
                 <p className="text-muted">The Roe River runs from Giant Springs to the Missouri River near Great Falls, Montana, United States. The Roe River is only 201 feet (61 m) long at its longest constant point, and had been named as the World&#39;s Shortest River by the Guinness book of World Records </p>
               </div>
-              <div className="col-sm-4 offset-md-1 py-4">
-                <h4 className="text-white">Contact</h4>
-              </div>
             </div>
           </div>
         </div>
