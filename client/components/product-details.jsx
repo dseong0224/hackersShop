@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ProductDetails extends React.Component {
+export default class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = { product: null };
@@ -63,4 +63,3 @@ class ProductDetails extends React.Component {
     return <div>Loading...</div>;
   }
 }
-export default ProductDetails;

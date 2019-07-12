@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
+import CartSummary from './cart-summary';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart.php')
       .then(response => response.json())
-      .then(cart => this.setState(cart));
+      .then(cart => this.setState({ cart }));
   }
   addToCart(product) {
     fetch('/api/cart.php', {
@@ -53,14 +54,22 @@ export default class App extends React.Component {
     if (this.state.view.name === 'details') {
       return (
         <div>
-          <Header numberOfItems={this.state.cart.length}/>
+          <Header numberOfItems={this.state.cart.length} updateViewState={this.setView}/>
           <ProductDetails viewdetail={this.state.view.params} updateViewState={this.setView} handleAddToCart={this.addToCart}/>
+        </div>
+      );
+    }
+    if (this.state.view.name === 'cart') {
+      return (
+        <div>
+          <Header numberOfItems={this.state.cart.length} updateViewState={this.setView}/>
+          <CartSummary cartStateProps={this.state.cart} nameStateProps={this.state.view.name} updateViewState={this.setView}/>
         </div>
       );
     }
     return (
       <div>
-        <Header numberOfItems={this.state.cart.length}/>
+        <Header numberOfItems={this.state.cart.length} updateViewState={this.setView}/>
         <ProductList productsFromApi={this.state.products} updateViewState={this.setView}/>
       </div>
     );
