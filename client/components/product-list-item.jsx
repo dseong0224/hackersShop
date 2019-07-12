@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProductListItem(props) {
+export default function ProductListItem(props) {
   function handleClick() {
     props.handleSetViewCallBack('details', { id: props.data.id });
   }
@@ -17,4 +17,3 @@ function ProductListItem(props) {
     </div>
   );
 }
-export default ProductListItem;

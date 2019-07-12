@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductListItem from './product-list-item';
 
-class ProductList extends React.Component {
+export default class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.makeProductList = this.makeProductList.bind(this);
@@ -26,5 +26,3 @@ class ProductList extends React.Component {
   }
 
 }
-
-export default ProductList;
