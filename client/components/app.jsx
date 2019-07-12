@@ -12,11 +12,14 @@ export default class App extends React.Component {
       view: {
         name: 'catalog',
         params: {}
-      } };
+      },
+      cart: []
+    };
     this.setView = this.setView.bind(this);
   }
   componentDidMount() {
     this.getProducts();
+    this.getCartItems();
   }
   getProducts() {
     fetch('/api/products.php')
@@ -29,6 +32,11 @@ export default class App extends React.Component {
       name,
       params
     } });
+  }
+  getCartItems() {
+    fetch('/api/cart.php')
+      .then(response => response.json())
+      .then(cart => this.setState(cart));
   }
 
   render() {
