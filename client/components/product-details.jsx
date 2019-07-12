@@ -5,6 +5,7 @@ class ProductDetails extends React.Component {
     super(props);
     this.state = { product: null };
     this.resetSetView = this.resetSetView.bind(this);
+    this.callAddToCart = this.callAddToCart.bind(this);
   }
 
   componentDidMount() {
@@ -15,6 +16,10 @@ class ProductDetails extends React.Component {
 
   resetSetView() {
     this.props.updateViewState('catalog', {});
+  }
+
+  callAddToCart() {
+    this.props.handleAddToCart(this.state.product);
   }
 
   render() {
@@ -46,6 +51,7 @@ class ProductDetails extends React.Component {
                 <p className="lead">${(this.state.product.price / 100).toFixed(2)}</p>
                 <h5>Summary:</h5>
                 <p>{this.state.product.shortDescription}</p>
+                <button onClick={this.callAddToCart}>Add to Cart</button>
               </main>
             </div>
           </div>
