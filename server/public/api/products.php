@@ -1,7 +1,6 @@
 <?php
 
-header('Content-Type: application/json');
-require('functions.php');
+require_once('functions.php');
 
 set_exception_handler('handleError');
 // if (empty($_GET['id'])) {
@@ -13,7 +12,18 @@ startUp();
 
 require_once('db_connection.php');
 
-$query = "SELECT * FROM products";
+if(!empty($_GET["id"])){
+  $id = $_GET["id"];
+  $whereClause = " WHERE `id`=".$id;
+} else {
+  if(is_numeric($id)){
+    $whereClause = "";
+  } else {
+    throw new Exception('id needs to be a number');
+  }
+}
+
+$query = "SELECT * FROM `products` $whereClause";
 
 $result = mysqli_query($conn, $query);
 
@@ -27,5 +37,4 @@ while($row = mysqli_fetch_assoc($result)){
 }
 
 print(json_encode($output));
-throw new Exception('there was an error');
 ?>
