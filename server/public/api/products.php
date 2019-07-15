@@ -20,11 +20,11 @@ if(!$result){
   throw new Exception('error with query: '.mysqli_error($conn));
 }
 
-$data = [];
+$ouput = [];
 while($row = mysqli_fetch_assoc($result)){
-  $data[] = $row;
+  $output[] = $row;
 }
 
-print(json_encode($data));
+print(json_encode($output));
 throw new Exception('there was an error');
 ?>
