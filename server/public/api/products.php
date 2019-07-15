@@ -9,6 +9,7 @@ set_exception_handler('handleError');
 // } else {
 //   readfile('dummy-product-details.json');
 // }
+startUp();
 
 require_once('db_connection.php');
 
