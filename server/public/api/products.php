@@ -1,11 +1,30 @@
 <?php
 
 header('Content-Type: application/json');
+require('functions.php');
 
-if (empty($_GET['id'])) {
-  readfile('dummy-products-list.json');
-} else {
-  readfile('dummy-product-details.json');
+set_exception_handler('handleError');
+// if (empty($_GET['id'])) {
+//   readfile('dummy-products-list.json');
+// } else {
+//   readfile('dummy-product-details.json');
+// }
+
+require_once('db_connection.php');
+
+$query = "SELECT * FROM products";
+
+$result = mysqli_query($conn, $query);
+
+if(!$result){
+  throw new Exception('error with query: '.mysqli_error($conn));
 }
 
+$data = [];
+while($row = mysqli_fetch_assoc($result)){
+  $data[] = $row;
+}
+
+print(json_encode($data));
+throw new Exception('there was an error');
 ?>
