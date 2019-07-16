@@ -14,16 +14,13 @@ require_once('db_connection.php');
 
 if(!empty($_GET["id"])){
   $id = $_GET["id"];
-  $whereClause = " WHERE `id`=".$id;
-} else {
-  if(is_numeric($id)){
-    $whereClause = "";
-  } else {
+  if(!is_numeric($id)){
     throw new Exception('id needs to be a number');
   }
+  $query = "SELECT * FROM `products` WHERE `id`=".$id;
+} else {
+  $query = "SELECT id, name, price, image, shortDescription FROM `products`";
 }
-
-$query = "SELECT * FROM `products` $whereClause";
 
 $result = mysqli_query($conn, $query);
 
