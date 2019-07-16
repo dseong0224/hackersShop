@@ -24,10 +24,14 @@ if(!$result){
   throw new Exception('error with query: '.mysqli_error($conn));
 }
 
-$output = [];
-while($row = mysqli_fetch_assoc($result)){
-  $output[] = $row;
-}
-
+if(!empty($id)){
+  $output = mysqli_fetch_assoc($result);
+  } else {
+    $output = [];
+    while($row = mysqli_fetch_assoc($result)){
+    $output[] = $row;
+    }
+  }
+  
 print(json_encode($output));
 ?>
