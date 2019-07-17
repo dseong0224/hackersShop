@@ -13,9 +13,14 @@ if(!empty($_GET["id"])){
   if(!is_numeric($id)){
     throw new Exception('id needs to be a number');
   }
-  $query = "SELECT * FROM `products` WHERE `id`=".$id;
+  $query = "SELECT p.id, p.name AS productName, p.price, p.shortDescription, p.longDescription, GROUP_CONCAT(i.image) AS images 
+  FROM `images` AS i 
+  JOIN `products` AS p 
+    ON p.`id` = i.`product_id` 
+  WHERE p.`id`= $id  
+  GROUP BY p.`id`"; 
 } else {
-  $query = "SELECT id, name, price, image, shortDescription FROM `products`";
+  $query = "SELECT id, name, price, shortDescription, image FROM `products`";
 }
 
 $result = mysqli_query($conn, $query);
@@ -25,7 +30,9 @@ if(!$result){
 }
 
 if(!empty($id)){
-  $output = mysqli_fetch_assoc($result);
+  $row = mysqli_fetch_assoc($result);
+  $row["images"] = explode(",", $row["images"]);
+  $output=$row;
   } else {
     $output = [];
     while($row = mysqli_fetch_assoc($result)){
@@ -35,3 +42,5 @@ if(!empty($id)){
   
 print(json_encode($output));
 ?>
+
+
