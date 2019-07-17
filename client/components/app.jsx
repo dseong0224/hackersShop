@@ -62,7 +62,6 @@ export default class App extends React.Component {
       .then(orderObject => {
         return (this.setState({
           cart: [...this.state.cart, orderObject]
-          // view: { name: 'catalog', params: {} }
         }));
       })
       .catch(error => console.error(error));

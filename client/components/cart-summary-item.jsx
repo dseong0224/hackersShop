@@ -5,7 +5,7 @@ export default function CartSummaryItem(props) {
     props.viewCartItemDetails('details', { id: props.data.id });
   }
   return (
-    <div className="card mb-3" style={{ 'maxWidth': 540 + 'px' }}>
+    <div className="card mb-3" style={{ 'maxWidth': '540px' }}>
       <div className="row no-gutters">
         <div className="col-md-4">
           <h5 className="card-title">{props.data.name}</h5>
