@@ -52,10 +52,9 @@ export default function CartSummary(props) {
 }
 
 function totalPrice(cartItems) {
-  const itemPriceArray = cartItems.map(cartItem => cartItem.price);
   let priceTotal = 0;
-  for (var priceIndex = 0; priceIndex < itemPriceArray.length; priceIndex++) {
-    priceTotal += itemPriceArray[priceIndex];
+  for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
+    priceTotal += parseFloat(cartItems[priceIndex].price);
   }
   return '$' + (priceTotal / 100).toFixed(2);
 }
