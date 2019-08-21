@@ -19,6 +19,8 @@
     ]
   },
   "dependencies": {
+    "bootstrap": "4.3.1",
+    "npm-watch": "0.6.0",
     "react": "16.8.6",
     "react-dom": "16.8.6"
   },
