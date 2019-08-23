@@ -28,8 +28,8 @@ export default class App extends React.Component {
   getProducts() {
     fetch('/api/products.php')
       .then(response => response.json())
-      .then(products => this.setState({ products }))
-      .catch(error => console.error(error));
+      .then(products => this.setState({ products }));
+    // .catch(error => console.error(error));
   }
   setView(name, params) {
     this.setState({ view: {
