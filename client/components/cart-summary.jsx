@@ -21,21 +21,25 @@ export default function CartSummary(props) {
       <div>
         <div>
           <div>
-            <div className="btn-group btn-group-toggle" data-toggle="buttons">
-              <label className="btn btn-secondary active">
-                <button onClick={resetSetView} checked>Back to Catalog</button>
-              </label>
-            </div>
             <div>
             </div>
           </div>
         </div>
         <div role="main">
+          <div className=" mx-auto text-center">
+            <h3>Cart Summary</h3>
+          </div>
           <div className="container">
-            <div className="col">
-              {listCartItems()}
-                        Total: {totalPrice(props.cartStateProps)}
-              <button onClick={viewCheckoutForm}>Checkout</button>
+            <div className="col">{listCartItems()}</div>
+            <div className="col-12 col-sm-6 col-md-8">
+              Total Amount: {totalPrice(props.cartStateProps)}
+            </div>
+            <div className="row">
+              <button type="button" className="col btn btn-light border border-success" onClick={viewCheckoutForm}>Checkout</button>
+              <div className="col"></div>
+              <button type="button" className="col btn btn-light border border-success" onClick={resetSetView} style={{ cursor: 'pointer' }}>
+               Back to Shopping
+              </button>
             </div>
           </div>
         </div>
