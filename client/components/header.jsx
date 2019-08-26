@@ -16,7 +16,7 @@ export default class Header extends React.Component {
           <div className="container">
             <div className="row">
               <div className="col-sm-8 col-md-7 py-4">
-                <h4 className="text-white">About</h4>
+                <h4 className="text-white">About <strong>hacker/&apos;s_Shop</strong></h4>
                 <p className="text-white">One Stop Shop for Hackers</p>
                 <p className="text-white">We sell keyboards, mice and more computer related tools and gears that will help you code, hack, program, develop, engineer with comfort</p>
               </div>

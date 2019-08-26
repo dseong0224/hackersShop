@@ -26,7 +26,7 @@ export default class ProductDetails extends React.Component {
     if (this.state.product) {
       return (
         <div className="container">
-          <header className="masthead mb-auto">
+          {/* <header className="masthead mb-auto">
             <div className="inner">
               <nav className="nav nav-masthead">
                 <div className="btn-group btn-group-toggle" data-toggle="buttons">
@@ -36,7 +36,7 @@ export default class ProductDetails extends React.Component {
                 </div>
               </nav>
             </div>
-          </header>
+          </header> */}
           <div className="text-center">
             <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"></div>
           </div>
@@ -51,7 +51,11 @@ export default class ProductDetails extends React.Component {
                 <p className="lead">${(this.state.product.price / 100).toFixed(2)}</p>
                 <h5>Summary:</h5>
                 <p>{this.state.product.shortDescription}</p>
-                <button onClick={this.callAddToCart}>Add to Cart</button>
+                <p>
+                  <button type="button" className="btn btn-success my-2" onClick={this.callAddToCart}>Add to Cart</button>
+                  <div></div>
+                  <button type="button" className="btn btn-light border border-success my-2" onClick={this.resetSetView} role="button">Back to shopping»</button>
+                </p>
               </main>
             </div>
           </div>

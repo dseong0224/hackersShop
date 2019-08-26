@@ -14,10 +14,10 @@ export default function CartSummaryItem(props) {
         <div className="col-md-8">
           <div className="card-body">
             <div className="card-text">
-              <h2>Short Description:</h2>
+              <h5>Short Description:</h5>
               {props.data.shortDescription}
             </div>
-            <p><button type="button" className="btn btn-light" onClick={viewDetails} role="button">View details »</button></p>
+            <button type="button" className="btn btn-light" onClick={viewDetails} role="button">View details »</button>
           </div>
         </div>
       </div>

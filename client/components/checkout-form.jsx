@@ -11,6 +11,7 @@ export default class CheckoutForm extends React.Component {
     this.props.updateViewState('catalog', {});
     this.props.resetCart();
   }
+
   render() {
     return (
       <div>
