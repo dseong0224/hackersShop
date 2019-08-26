@@ -17,7 +17,7 @@ export default function CartSummaryItem(props) {
               <h2>Short Description:</h2>
               {props.data.shortDescription}
             </div>
-            <p><a className="btn btn-secondary" onClick={viewDetails} role="button">View details »</a></p>
+            <p><button type="button" className="btn btn-light" onClick={viewDetails} role="button">View details »</button></p>
           </div>
         </div>
       </div>
