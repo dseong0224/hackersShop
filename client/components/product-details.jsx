@@ -26,17 +26,6 @@ export default class ProductDetails extends React.Component {
     if (this.state.product) {
       return (
         <div className="container">
-          {/* <header className="masthead mb-auto">
-            <div className="inner">
-              <nav className="nav nav-masthead">
-                <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label className="btn btn-secondary active">
-                    <a onClick={this.resetSetView} checked>Back to Catalog</a>
-                  </label>
-                </div>
-              </nav>
-            </div>
-          </header> */}
           <div className="text-center">
             <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"></div>
           </div>
