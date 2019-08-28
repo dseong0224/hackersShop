@@ -8,10 +8,14 @@ export default class ProductDetails extends React.Component {
     this.callAddToCart = this.callAddToCart.bind(this);
   }
 
-  componentDidMount() {
-    fetch('/api/products.php?id=1')
+  selectItem(id) {
+    fetch('/api/products.php?id=' + id)
       .then(response => response.json())
       .then(product => this.setState({ product }));
+  }
+
+  componentDidMount() {
+    this.selectItem(this.props.detailId);
   }
 
   resetSetView() {
