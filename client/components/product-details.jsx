@@ -25,31 +25,29 @@ export default class ProductDetails extends React.Component {
   render() {
     if (this.state.product) {
       return (
-        <div className="container">
-          <div className="text-center">
-            <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column"></div>
-          </div>
+        <div className="mt-3 mb-5 container">
           <div className="row">
-            <div className="col-6">
-              <img src={this.state.product.image} className="img-fluid" alt={this.state.product.name}></img>
+            <div className="col-sm-7">
+              <img width="90%" src={this.state.product.images[0]} alt={this.state.product.productName} className="card-img"/>
             </div>
-            <div className="col-6">
-              <main role="main" className="inner cover">
-                <h5 className="masthead-brand">Product Details</h5>
-                <h4 className="cover-heading">{this.state.product.name}</h4>
-                <p className="lead">${(this.state.product.price / 100).toFixed(2)}</p>
-                <h5>Summary:</h5>
-                <p>{this.state.product.shortDescription}</p>
-                <p>
-                  <button type="button" className="btn btn-success my-2" onClick={this.callAddToCart}>Add to Cart</button>
-                  <div></div>
-                  <button type="button" className="btn btn-light border border-success my-2" onClick={this.resetSetView} role="button">Back to shopping»</button>
-                </p>
-              </main>
+            <div className="m-auto col-sm-5">
+              <div className="text-center">
+                <h4 className="text-dark">{this.state.product.productName}</h4>
+                <p className="lead mb-3">${(this.state.product.price / 100).toFixed(2)}</p>
+                <div className="h5 mb-1">Quantity:</div>
+                <div className="h4 mb-4 noselect">
+                  <i className="fas fa-minus-square pointer-hover ml-3 mr-4"></i>
+                  1
+                  <i className="fas fa-plus-square pointer-hover ml-4 mr-3"></i>
+                </div>
+                <button type="button" className="mb-2 btn btn-success btn-lg">ADD TO CART</button>
+                <button type="button" className="d-block m-auto btn btn-light border border-success">&#60;&#60; BACK TO CATALOG</button>
+              </div>
             </div>
-          </div>
-          <h5>About this product:</h5>
-          <p>{this.state.product.longDescription}</p>
+          </div><hr/>
+          <div className="h5 description-font text-muted">Product Details</div><hr/>
+          <div className="h6 description-font">{this.state.product.longDescription}</div>
+          <hr/>
         </div>
       );
     }
