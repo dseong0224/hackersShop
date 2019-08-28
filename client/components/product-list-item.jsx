@@ -5,7 +5,7 @@ export default function ProductListItem(props) {
     props.handleSetViewCallBack('details', { id: props.data.id });
   }
   const imagecenter = {
-    height: '225px',
+    height: '325px',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
@@ -17,7 +17,7 @@ export default function ProductListItem(props) {
       <div className="card-font text-center shadow-sm card">
         <h5 className="card-title text-black bg-light" style={{ display: 'inline', flexDirection: 'row', padding: 10, height: '85px' }}>{props.data.name}</h5>
         <div className="text-center " style={imagecenter}>
-          <img className="card-img-top" onClick = {handleClick} src={props.data.image} style={{ Width: '100%', cursor: 'pointer' }} alt={props.data.name}/>
+          <img className="card-img-top" onClick = {handleClick} src={props.data.image} style={{ Width: '90%', cursor: 'pointer' }} alt={props.data.name}/>
         </div>
         <div className="card-body">
           <div className="h5 text-muted mb-1 card-subtitle">${(props.data.price / 100).toFixed(2)}</div>
