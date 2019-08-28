@@ -21,7 +21,6 @@ export default class ProductList extends React.Component {
         <main>
           <div className="justify-content-md-center mr-1 ml-1 row">
             {this.makeProductList()}
-            {/* {console.log(this.props.productsFromApi)} */}
           </div>
         </main>
       </React.Fragment>
