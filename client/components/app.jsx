@@ -71,7 +71,7 @@ export default class App extends React.Component {
   }
   renderOption() {
     if (this.state.view.name === 'details') {
-      return <ProductDetails viewdetail={this.state.view.params} updateViewState={this.setView} handleAddToCart={this.addToCart}/>;
+      return <ProductDetails detailId={this.state.view.params.id} viewdetail={this.state.view.params} updateViewState={this.setView} handleAddToCart={this.addToCart}/>;
     }
     if (this.state.view.name === 'cart') {
       return <CartSummary cartStateProps={this.state.cart} nameStateProps={this.state.view.name} updateViewState={this.setView}/>;
