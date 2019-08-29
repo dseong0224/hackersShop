@@ -79,7 +79,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'checkout') {
       return <CheckoutForm cartStateProps={this.state.cart} updateViewState={this.setView} resetCart={this.resetCart} placedOrderProps={this.placeOrder}/>;
     }
-    return <ProductList productsFromApi={this.state.products} updateViewState={this.setView}/>;
+    return <ProductList productsFromApi={this.state.products} updateViewState={this.setView} viewdetail={this.state.view.params}/>;
   }
   render() {
     return (

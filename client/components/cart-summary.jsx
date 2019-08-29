@@ -18,29 +18,26 @@ export default function CartSummary(props) {
   }
   if (props.nameStateProps === 'cart') {
     return (
-      <div>
-        <div>
-          <div>
-            <div>
+      <div className="mt-4 mb-4 container">
+        <div className="row">
+          <div className="col-sm-7">
+            <div className="h3">CART <span className="h6 text-muted">19 item(s)</span></div>
+            <div className="container">
+              <div className="mt-3 mb-3">
+                <hr/>
+                {listCartItems()}
+              </div>
             </div>
           </div>
-        </div>
-        <div role="main">
-          <div className=" mx-auto text-center">
-            <h3>Cart Summary</h3>
-          </div>
-          <div className="container">
-            <div className="col">{listCartItems()}</div>
-            <div className="col-12 col-sm-6 col-md-8">
-              Total Amount: {totalPrice(props.cartStateProps)}
-            </div>
-            <div className="row">
-              <button type="button" className="col btn btn-light border border-success" onClick={viewCheckoutForm}>Checkout</button>
-              <div className="col"></div>
-              <button type="button" className="col btn btn-light border border-success" onClick={resetSetView} style={{ cursor: 'pointer' }}>
-               Back to Shopping
-              </button>
-            </div>
+          <div className="col-sm-5">
+            <h3> Summary </h3><hr/>
+            <div className="h6">Subtotal: <span className="float-right">{subTotalPrice(props.cartStateProps)}</span></div>
+            <div className="h6"> Shipping: <span className="float-right">FREE</span></div>
+            <div className="h6 mb-4">Tax: <span className="float-right">{totalTax(props.cartStateProps)}</span></div>
+            <hr/>
+            <div className="h5 mb-4">TOTAL : <span className="float-right">{totalPrice(props.cartStateProps)}</span></div>
+            <button type="button" className="btn btn-light border border-success btn-block" onClick={resetSetView} style={{ cursor: 'pointer' }}>BACK TO SHOPPING</button>
+            <button type="button" className="btn btn-light border border-success btn-block" onClick={viewCheckoutForm} style={{ cursor: 'pointer' }}>CHECKOUT</button>
           </div>
         </div>
       </div>
@@ -55,10 +52,24 @@ export default function CartSummary(props) {
   );
 }
 
-function totalPrice(cartItems) {
+function subTotalPrice(cartItems) {
   let priceTotal = 0;
   for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
     priceTotal += parseFloat(cartItems[priceIndex].price);
   }
   return '$' + (priceTotal / 100).toFixed(2);
+}
+function totalTax(cartItems) {
+  let priceTotal = 0;
+  for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
+    priceTotal += parseFloat(cartItems[priceIndex].price);
+  }
+  return '$' + (priceTotal * 0.9 / 1000).toFixed(2);
+}
+function totalPrice(cartItems) {
+  let priceTotal = 0;
+  for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
+    priceTotal += parseFloat(cartItems[priceIndex].price);
+  }
+  return '$' + (priceTotal * 1.09 / 100).toFixed(2);
 }

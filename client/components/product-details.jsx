@@ -79,8 +79,8 @@ export default class ProductDetails extends React.Component {
                   1
                   <i className="fas fa-plus-square pointer-hover ml-4 mr-3"></i>
                 </div>
-                <button type="button" className="mb-2 btn btn-success btn-lg">ADD TO CART</button>
-                <button type="button" className="d-block m-auto btn btn-light border border-success">&#60;&#60; BACK TO CATALOG</button>
+                <button type="button" className="mb-2 btn btn-success btn-lg" onClick={this.callAddToCart}>ADD TO CART</button>
+                <button type="button" className="d-block m-auto btn btn-light border border-success" onClick={this.resetSetView}>&#60;&#60; BACK TO CATALOG</button>
               </div>
             </div>
           </div><hr/>

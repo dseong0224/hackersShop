@@ -17,7 +17,8 @@ export default class ProductList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <ListCarousel/>
+        <ListCarousel products={this.props.productsFromApi} handleSetViewCallBack={this.props.updateViewState}/>
+        {/* {console.log('this.props.productsFromApi: ', this.props.productsFromApi[5])} */}
         <main>
           <div className="justify-content-md-center mr-1 ml-1 row">
             {this.makeProductList()}
