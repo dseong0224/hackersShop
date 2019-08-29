@@ -23,7 +23,7 @@ export default class Header extends React.Component {
           </div>
         </div>
         <div className="navbar navbar-dark shadow-sm" style={{ backgroundColor: 'green' }}>
-          <div className="container">
+          <div className="container" style={{ maxWidth: '100%' }}>
             <div className="row text-white">
               <a onClick={this.navHome} className="navbar-brand d-flex align-items-center" style={{ cursor: 'pointer' }}>
                 <img src="https://icon-library.net//images/icon-hacker/icon-hacker-12.jpg" width="40" height="40" />
