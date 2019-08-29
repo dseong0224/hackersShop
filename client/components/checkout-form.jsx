@@ -61,10 +61,9 @@ export default class CheckoutForm extends React.Component {
               </form>
             </div>
           </div>
-          <div className="row">
-            <button className="col btn btn-success btn-lg btn-block" type="submit" onClick={this.placeOrder}>Place Order</button>
-            <div className="col"></div>
-            <button className="col btn btn-light border border-success" type="button">Back to Shopping</button>
+          <div className="col-sm-5">
+            <button type="button" className="btn btn-success btn-block" onClick={this.placeOrder}>PLACE ORDER</button>
+            <button type="button" className="btn btn-secondary border border-success btn-block">BACK TO CART</button>
           </div>
         </div>
       </div>
@@ -72,10 +71,11 @@ export default class CheckoutForm extends React.Component {
     );
   }
 }
+
 function totalPrice(cartItems) {
   let priceTotal = 0;
   for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
     priceTotal += parseFloat(cartItems[priceIndex].price);
   }
-  return '$' + (priceTotal / 100).toFixed(2);
+  return '$' + (priceTotal * 1.09 / 100).toFixed(2);
 }

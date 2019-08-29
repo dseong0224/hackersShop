@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductDetailCarouselImgs from './product-detail-carousel';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
@@ -18,6 +19,16 @@ export default class ProductDetails extends React.Component {
     this.selectItem(this.props.detailId);
   }
 
+  makeCarousel() {
+    let carouselImagesArray = [];
+    for (let imageIndex = 1; imageIndex < this.state.product.images.length; imageIndex++) {
+      carouselImagesArray.push(
+        <ProductDetailCarouselImgs key={this.state.product.id} imageSrc={this.state.product.images[imageIndex]} productName={this.state.product.productName}/>
+      );
+      return carouselImagesArray;
+    }
+  }
+
   resetSetView() {
     this.props.updateViewState('catalog', {});
   }
@@ -27,12 +38,39 @@ export default class ProductDetails extends React.Component {
   }
 
   render() {
+    // console.log("this.state.product from product-detail: ",this.state.product)
+
     if (this.state.product) {
       return (
         <div className="mt-3 mb-5 container">
           <div className="row">
             <div className="col-sm-7">
-              <img width="90%" src={this.state.product.images[0]} alt={this.state.product.productName} className="card-img"/>
+              {/* <React.Fragment> */}
+              <div className="bs-example">
+                <div id="myCarousel" className="carousel slide" data-ride="carousel">
+                  <ol className="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                  </ol>
+
+                  <div className="carousel-inner">
+                    <div className="carousel-item active">
+                      <img width="90%" src={this.state.product.images[0]} alt={this.state.product.productName} className="card-img"/>
+                      {/* {console.log('this.state.product from product-detail: ', this.state.product)} */}
+                    </div>
+                    {this.makeCarousel()}
+                  </div>
+                  <a className="carousel-control-prev" href="#myCarousel" data-slide="prev" style={{ filter: 'invert(100%)' }}>
+                    <span className="carousel-control-prev-icon"></span>
+                  </a>
+                  <a className="carousel-control-next" href="#myCarousel" data-slide="next" style={{ filter: 'invert(100%)' }}>
+                    <span className="carousel-control-next-icon"></span>
+                  </a>
+                </div>
+              </div>
+              {/* </React.Fragment> */}
+
             </div>
             <div className="m-auto col-sm-5">
               <div className="text-center">
@@ -44,8 +82,8 @@ export default class ProductDetails extends React.Component {
                   1
                   <i className="fas fa-plus-square pointer-hover ml-4 mr-3"></i>
                 </div>
-                <button type="button" className="mb-2 btn btn-success btn-lg">ADD TO CART</button>
-                <button type="button" className="d-block m-auto btn btn-light border border-success">&#60;&#60; BACK TO CATALOG</button>
+                <button type="button" className="mb-2 btn btn-success btn-lg" onClick={this.callAddToCart}>ADD TO CART</button>
+                <button type="button" className="d-block m-auto btn btn-light border border-success" onClick={this.resetSetView}>&#60;&#60; BACK TO CATALOG</button>
               </div>
             </div>
           </div><hr/>

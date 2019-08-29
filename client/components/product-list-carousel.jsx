@@ -2,6 +2,16 @@ import React from 'react';
 // import ProductListItem from './product-list-item';
 
 export default class Carousel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    // console.log('apple props:', this.props.products[5]);
+    this.props.handleSetViewCallBack('details', { id: this.props.products[5].id });
+  }
+
   render() {
     return (
       <div id="myCarousel" className="carousel slide" data-ride="carousel">
@@ -17,7 +27,7 @@ export default class Carousel extends React.Component {
               <div className="carousel-caption text-dark text-right">
                 <h1>SK621</h1>
                 <p>LOW PROFILE. RGB BACKLIGHTING AND RING</p>
-                <p><a className="btn btn-lg btn-default border border-dark" style={{ cursor: 'pointer' }} role="button">View Product</a></p>
+                <p><a className="btn btn-lg btn-default border border-dark" style={{ cursor: 'pointer' }} role="button" >View Product</a></p>
               </div>
             </div>
           </div>
@@ -37,7 +47,7 @@ export default class Carousel extends React.Component {
               <div className="carousel-caption text-dark text-left">
                 <h1>Apple</h1>
                 <p>For Gorgeous Design and Apple Ecosystem</p>
-                <p><a className="btn btn-lg btn-default border border-dark" style={{ cursor: 'pointer' }} role="button">View Product</a></p>
+                <p><a className="btn btn-lg btn-default border border-dark" style={{ cursor: 'pointer' }} role="button" onClick={this.handleClick}>View Product</a></p>
               </div>
             </div>
           </div>
