@@ -7,6 +7,9 @@ export default class ProductDetails extends React.Component {
     this.state = { product: null };
     this.resetSetView = this.resetSetView.bind(this);
     this.callAddToCart = this.callAddToCart.bind(this);
+    this.generateCarouselIndicator = this.generateCarouselIndicator.bind(this);
+    this.carouselImagesArray = [];
+    this.carouselIndicator = [];
   }
 
   selectItem(id) {
@@ -20,13 +23,23 @@ export default class ProductDetails extends React.Component {
   }
 
   makeCarousel() {
-    let carouselImagesArray = [];
     for (let imageIndex = 1; imageIndex < this.state.product.images.length; imageIndex++) {
-      carouselImagesArray.push(
-        <ProductDetailCarouselImgs key={this.state.product.id} imageSrc={this.state.product.images[imageIndex]} productName={this.state.product.productName}/>
+      // console.log(this.state.product.images.length);
+      // console.log('this.state.product.images[imageIndex]: ', this.state.product.images[imageIndex]);
+      this.carouselImagesArray.push(
+        <ProductDetailCarouselImgs key={this.state.product.images[imageIndex]} imageSrc={this.state.product.images[imageIndex]} productName={this.state.product.productName}/>
       );
-      return carouselImagesArray;
     }
+    return this.carouselImagesArray;
+  }
+
+  generateCarouselIndicator() {
+    for (let carouselIndex = 1; carouselIndex < this.state.product.images.length; carouselIndex++) {
+      this.carouselIndicator.push(
+        <li data-target="#myCarousel" data-slide-to= "{carouselIndex}"></li>
+      );
+    }
+    return this.carouselIndicator;
   }
 
   resetSetView() {
@@ -45,19 +58,16 @@ export default class ProductDetails extends React.Component {
         <div className="mt-3 mb-5 container">
           <div className="row">
             <div className="col-sm-7">
-              {/* <React.Fragment> */}
               <div className="bs-example">
                 <div id="myCarousel" className="carousel slide" data-ride="carousel">
-                  <ol className="carousel-indicators">
+                  <ol className="carousel-indicators" style={{ filter: 'invert(100%)' }}>
                     <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    {this.generateCarouselIndicator()}
                   </ol>
-
-                  <div className="carousel-inner">
+                  <div className="carousel-inner" style={{ height: '40vh', display: 'flex', alignItems: 'center' }}>
                     <div className="carousel-item active">
-                      <img width="90%" src={this.state.product.images[0]} alt={this.state.product.productName} className="card-img"/>
-                      {/* {console.log('this.state.product from product-detail: ', this.state.product)} */}
+                      <img height="100%" src={this.state.product.images[0]} alt={this.state.product.productName} className="card-img"/>
+                      {/* {console.log('this.state.product from product-detail: ', this.state.product.images)} */}
                     </div>
                     {this.makeCarousel()}
                   </div>
@@ -69,8 +79,6 @@ export default class ProductDetails extends React.Component {
                   </a>
                 </div>
               </div>
-              {/* </React.Fragment> */}
-
             </div>
             <div className="m-auto col-sm-5">
               <div className="text-center">
