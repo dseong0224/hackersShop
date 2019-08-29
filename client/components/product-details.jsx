@@ -15,6 +15,10 @@ export default class ProductDetails extends React.Component {
       .then(product => this.setState({ product }));
   }
 
+  componentDidMount() {
+    this.selectItem(this.props.detailId);
+  }
+
   makeCarousel() {
     let carouselImagesArray = [];
     for (let imageIndex = 1; imageIndex < this.state.product.images.length; imageIndex++) {
@@ -23,10 +27,6 @@ export default class ProductDetails extends React.Component {
       );
       return carouselImagesArray;
     }
-  }
-
-  componentDidMount() {
-    this.selectItem(this.props.detailId);
   }
 
   resetSetView() {
@@ -38,6 +38,8 @@ export default class ProductDetails extends React.Component {
   }
 
   render() {
+    // console.log("this.state.product from product-detail: ",this.state.product)
+
     if (this.state.product) {
       return (
         <div className="mt-3 mb-5 container">
@@ -55,6 +57,7 @@ export default class ProductDetails extends React.Component {
                   <div className="carousel-inner">
                     <div className="carousel-item active">
                       <img width="90%" src={this.state.product.images[0]} alt={this.state.product.productName} className="card-img"/>
+                      {/* {console.log('this.state.product from product-detail: ', this.state.product)} */}
                     </div>
                     {this.makeCarousel()}
                   </div>

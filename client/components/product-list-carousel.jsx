@@ -9,7 +9,7 @@ export default class Carousel extends React.Component {
 
   handleClick() {
     // console.log('apple props:', this.props.products[5]);
-    // this.props.handleSetViewCallBack('details', { id: this.props.products[5] });
+    this.props.handleSetViewCallBack('details', { id: this.props.products[5].id });
   }
 
   render() {
