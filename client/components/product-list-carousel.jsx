@@ -21,7 +21,7 @@ export default class Carousel extends React.Component {
 
   render() {
     return (
-      <div id="myCarousel" className="carousel slide" data-ride="carousel">
+      <div id="myCarousel" className="carousel slide" data-ride="carousel" style={{ height: '65vh' }}>
         <ol className="carousel-indicators" style={{ filter: 'invert(100%)' }}>
           <li data-target="#myCarousel" data-slide-to="0" className=""></li>
           <li data-target="#myCarousel" data-slide-to="1" className=""></li>
@@ -29,13 +29,13 @@ export default class Carousel extends React.Component {
         </ol>
         <div className="carousel-inner">
           <div className="carousel-item">
-            <img style={{ height: '50vh', position: 'relative', right: '-15%' }} src="https://images-na.ssl-images-amazon.com/images/I/61umHSM6OhL._SL1200_.jpg"/>
 
-            <div className="carousel-caption text-dark text-right" style={{ display: 'inline-block', position: 'relative' }}>
+            <div className="carousel-caption text-dark text-right" style={{ display: 'inline-block', position: 'relative', marginTop: '5%', marginRight: '20%' }}>
               <h1>SK621</h1>
               <p>LOW PROFILE. RGB BACKLIGHTING AND RING</p>
               <p><a className="btn btn-lg btn-default border border-dark" style={{ cursor: 'pointer' }} role="button" onClick={this.detailForProduct1}>View Product</a></p>
             </div>
+            <img style={{ height: '50vh', position: 'relative', right: '-10%', marginTop: '-10%' }} src="https://images-na.ssl-images-amazon.com/images/I/61umHSM6OhL._SL1200_.jpg"/>
 
           </div>
           <div className="carousel-item">
@@ -44,7 +44,7 @@ export default class Carousel extends React.Component {
               <p>Compact, lightweight, Bluetooth keyboard anywhere in your home.</p>
               <p><a className="btn btn-lg btn-default border border-dark" style={{ cursor: 'pointer' }} role="button" onClick={this.detailForProduct2}>View Product</a></p>
             </div>
-            <img style={{ height: '50vh', position: 'relative', right: '-10%' }} src="https://assets.logitech.com/assets/55384/k380-multi-device-bluetooth-keyboard.png"/>
+            <img style={{ height: '45vh', position: 'relative', right: '-10%' }} src="https://assets.logitech.com/assets/55384/k380-multi-device-bluetooth-keyboard.png"/>
 
           </div>
           <div className="carousel-item active">

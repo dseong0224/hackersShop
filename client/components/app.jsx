@@ -2,6 +2,7 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
+// import ProductListItem from './product-list-item';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
@@ -28,7 +29,13 @@ export default class App extends React.Component {
   getProducts() {
     fetch('/api/products.php')
       .then(response => response.json())
-      .then(products => this.setState({ products }));
+      .then(products => {
+        // const image = products.images[0];
+        // console.log('fetched products: ', products);
+        // products.mainImage = image;
+
+        this.setState({ products });
+      });
   }
   setView(name, params) {
     this.setState({ view: {
@@ -42,6 +49,10 @@ export default class App extends React.Component {
       .then(cart => this.setState({ cart }));
   }
   addToCart(product) {
+    if (!product.image) {
+      product.image = product.images[0];
+    }
+
     fetch('/api/cart.php', {
       method: 'POST',
       body: JSON.stringify(product),
@@ -79,7 +90,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'checkout') {
       return <CheckoutForm cartStateProps={this.state.cart} updateViewState={this.setView} resetCart={this.resetCart} placedOrderProps={this.placeOrder}/>;
     }
-    return <ProductList productsFromApi={this.state.products} updateViewState={this.setView} viewdetail={this.state.view.params}/>;
+    return <ProductList productsFromApi={this.state.products} updateViewState={this.setView} viewdetail={this.state.view.params} handleAddToCart={this.addToCart}/>;
   }
   render() {
     return (

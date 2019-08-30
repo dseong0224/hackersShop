@@ -7,7 +7,7 @@ export default function CartSummaryItem(props) {
   return (
 
     <div className="row align-items-center mt-1 mb-1">
-      <img style={{ 'maxWidth': '200px' }} src={props.data.images[0]} className="card-img" alt={props.data.name}/>
+      <img style={{ 'maxWidth': '200px' }} src={props.data.image} className="card-img" alt={props.data.name}/>
       <div className="col-sm-7">
         <h5 className="card-title">{props.data.name}</h5>
         <div className="h5 description-font text-muted">${(props.data.price / 100).toFixed(2)}</div>

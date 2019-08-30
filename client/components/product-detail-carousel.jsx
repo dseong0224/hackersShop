@@ -6,7 +6,7 @@ export default function ProductDetailCarouselImgs(props) {
   };
   return (
     <div className="carousel-item text-center">
-      <img style={carouselCss} src={props.imageSrc} alt={props.productName}/>
+      <img style={carouselCss} src={props.imageSrc} alt={props.name}/>
       {/* {console.log(props.imageSrc)} */}
     </div>
   );
