@@ -14,4 +14,9 @@ if(!function_exists('handleError')){
 function startUp(){
   header('Content-Type: application/json');
 }
+function getBodyData($json){
+  // $json_input = file_get_contents('php://input');
+  $input = json_decode($json);
+  return $input;
+}
 ?>
