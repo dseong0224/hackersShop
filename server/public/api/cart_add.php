@@ -1,7 +1,7 @@
 <?php
 require_once('functions.php');
 if(empty(INTERNAL)){
-  print("Can't have direct access");
+  print("NO DIRECT ACCESS");
   exit();
 } 
 
@@ -23,7 +23,9 @@ if(!empty($_SESSION['cartId'])) {
   $cartID = false;
 }
 
-$query = "SELECT products.price FROM products WHERE products.id = {$id}"; //make query
+$query = "SELECT products.price 
+          FROM products 
+          WHERE products.id = {$id}"; //make query
 $result = mysqli_query($conn, $query);
 
 if(!$result) { // make sure result is valid
@@ -46,7 +48,8 @@ if(!$transaction) {
 }      
 
 if($cartID === false) { //if there is no cart 
-  $insertQuery = "INSERT INTO cart SET cart.`created` = NOW()"; //make cart
+  $insertQuery = "INSERT INTO cart 
+                  SET cart.`created` = NOW()"; //make cart
 
   $cart = mysqli_query($conn, $insertQuery);
   if(!$cart) {
@@ -59,9 +62,13 @@ if($cartID === false) { //if there is no cart
   $_SESSION['cartId'] = mysqli_insert_id($conn); //store it into both cartId and $_SESSION[‘cartId’]
 }
 
-$cartItemQuery = "INSERT INTO cartItems SET cartItems.count = 1, cartItems.productID = {$id}, 
-                cartItems.price = {$price}, cartItems.added = NOW(), cartItems.cartID = {$cartID} 
-                ON DUPLICATE KEY UPDATE cartItems.count = cartItems.count + 1"; //query to add items
+$cartItemQuery = "INSERT INTO cartItems 
+                  SET cartItems.count = 1,
+                      cartItems.productID = {$id}, 
+                      cartItems.price = {$price}, 
+                      cartItems.added = NOW(), 
+                      cartItems.cartID = {$cartID} 
+                  ON DUPLICATE KEY UPDATE cartItems.count = cartItems.count + 1"; //query to add items
 
 $cartItem = mysqli_query($conn, $cartItemQuery);
 
