@@ -13,6 +13,7 @@ export default class ProductDetails extends React.Component {
   }
 
   selectItem(id) {
+    // console.log('Product ID:', id);
     fetch('/api/products.php?id=' + id)
       .then(response => response.json())
       .then(product => this.setState({ product }));
@@ -24,10 +25,8 @@ export default class ProductDetails extends React.Component {
 
   makeCarousel() {
     for (let imageIndex = 1; imageIndex < this.state.product.images.length; imageIndex++) {
-      // console.log(this.state.product.images.length);
-      // console.log('this.state.product.images[imageIndex]: ', this.state.product.images[imageIndex]);
       this.carouselImagesArray.push(
-        <ProductDetailCarouselImgs key={this.state.product.images[imageIndex]} imageSrc={this.state.product.images[imageIndex]} productName={this.state.product.productName}/>
+        <ProductDetailCarouselImgs key={this.state.product.images[imageIndex]} imageSrc={this.state.product.images[imageIndex]} productName={this.state.product.name}/>
       );
     }
     return this.carouselImagesArray;
@@ -47,42 +46,48 @@ export default class ProductDetails extends React.Component {
   }
 
   callAddToCart() {
-    this.props.handleAddToCart(this.state.product);
+    if (this.state.product.images.length !== 1) {
+      // this.setState({
+
+      // })
+      // this.state.product['image'] = this.state.product['images'].slice(0, 1);
+    }
+
+    // console.log('Details add to cart:', this.state.product);
+
+    const product = JSON.stringify(this.state.product);
+
+    this.props.handleAddToCart(JSON.parse(product));
   }
 
   render() {
-    // console.log("this.state.product from product-detail: ",this.state.product)
-
     if (this.state.product) {
       return (
         <div className="mt-3 mb-5 container">
           <div className="row">
             <div className="col-sm-7">
-              <div className="bs-example">
-                <div id="myCarousel" className="carousel slide" data-ride="carousel">
-                  <ol className="carousel-indicators" style={{ filter: 'invert(100%)' }}>
-                    <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-                    {this.generateCarouselIndicator()}
-                  </ol>
-                  <div className="carousel-inner" style={{ height: '40vh', display: 'flex', alignItems: 'center' }}>
-                    <div className="carousel-item active">
-                      <img height="100%" src={this.state.product.images[0]} alt={this.state.product.productName} className="card-img"/>
-                      {/* {console.log('this.state.product from product-detail: ', this.state.product.images)} */}
-                    </div>
-                    {this.makeCarousel()}
+              <div id="myCarousel" className="carousel slide" data-ride="carousel">
+                <ol className="carousel-indicators" style={{ filter: 'invert(100%)' }}>
+                  <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
+                  {this.generateCarouselIndicator()}
+                </ol>
+                <div className="carousel-inner" style={{ height: '40vh', display: 'flex', alignItems: 'center' }}>
+                  <div className="carousel-item active">
+                    <img height="100%" src={this.state.product.images[0]} alt={this.state.product.name} className="card-img"/>
                   </div>
-                  <a className="carousel-control-prev" href="#myCarousel" data-slide="prev" style={{ filter: 'invert(100%)' }}>
-                    <span className="carousel-control-prev-icon"></span>
-                  </a>
-                  <a className="carousel-control-next" href="#myCarousel" data-slide="next" style={{ filter: 'invert(100%)' }}>
-                    <span className="carousel-control-next-icon"></span>
-                  </a>
+                  {this.makeCarousel()}
                 </div>
+                <a className="carousel-control-prev" href="#myCarousel" data-slide="prev" style={{ filter: 'invert(100%)' }}>
+                  <span className="carousel-control-prev-icon"></span>
+                </a>
+                <a className="carousel-control-next" href="#myCarousel" data-slide="next" style={{ filter: 'invert(100%)' }}>
+                  <span className="carousel-control-next-icon"></span>
+                </a>
               </div>
             </div>
             <div className="m-auto col-sm-5">
               <div className="text-center">
-                <h4 className="text-dark">{this.state.product.productName}</h4>
+                <h4 className="text-dark">{this.state.product.name}</h4>
                 <p className="lead mb-3">${(this.state.product.price / 100).toFixed(2)}</p>
                 <div className="h5 mb-1">Quantity:</div>
                 <div className="h4 mb-4 noselect">
@@ -90,8 +95,8 @@ export default class ProductDetails extends React.Component {
                   1
                   <i className="fas fa-plus-square pointer-hover ml-4 mr-3"></i>
                 </div>
-                <button type="button" className="mb-2 btn btn-success btn-lg" onClick={this.callAddToCart}>ADD TO CART</button>
-                <button type="button" className="d-block m-auto btn btn-light border border-success" onClick={this.resetSetView}>&#60;&#60; BACK TO CATALOG</button>
+                <button type="button" className="mb-2 btn btn-lg btn-success" onClick={this.callAddToCart}>ADD TO CART</button>
+                <button type="button" className="d-block m-auto btn btn-lg btn-light border border-success" onClick={this.resetSetView}>TO CATALOG</button>
               </div>
             </div>
           </div><hr/>

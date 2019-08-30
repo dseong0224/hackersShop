@@ -1,9 +1,12 @@
 import React from 'react';
 
 export default function ProductDetailCarouselImgs(props) {
+  const carouselCss = {
+    width: '90%'
+  };
   return (
-    <div className="carousel-item">
-      <img height="100%" src={props.imageSrc} alt={props.productName} className="card-img"/>
+    <div className="carousel-item text-center">
+      <img style={carouselCss} src={props.imageSrc} alt={props.name}/>
       {/* {console.log(props.imageSrc)} */}
     </div>
   );
