@@ -1,87 +1,73 @@
 <?php
 require_once('functions.php');
-if(empty(INTERNAL)){
-  print("NO DIRECT ACCESS");
-  exit();
-} 
-
+if(!INTERNAL) {
+    print("Direct access not allowed");
+    exit();
+}
 $item = file_get_contents('php://input');
-
 $jsonBody = getBodyData($item);
-
-if($jsonBody -> id){
-  $id = $jsonBody->id;
-  if(intval($id) < 0){
-    throw new Exception('ID MUST BE GREATER THAN 0');
-  }
-
-}
-
-if(!empty($_SESSION['cartId'])) {
-  $cartID = $_SESSION['cartId'];
+if($jsonBody->id) {
+    $id = $jsonBody->id;
+    if(intval($id) < 1) {
+        throw new Exception('id must be greater than 0');
+    }
+    if(gettype($id) !== "integer") {
+        throw new Exception('id must be a number');
+    }
 } else {
-  $cartID = false;
+    throw new Exception('id required to add to cart');
+} 
+if($jsonBody->count) {
+    $count = $jsonBody->count;
 }
-
-$query = "SELECT products.price 
-          FROM products 
-          WHERE products.id = {$id}"; //make query
+if(empty($_SESSION['cartId'])) {
+    $cartID = false;
+} else {
+    $cartID = $_SESSION['cartId'];
+}
+$query = "SELECT `products`.`price` FROM `products` WHERE `products`.`id` = {$id}";
 $result = mysqli_query($conn, $query);
-
-if(!$result) { // make sure result is valid
-  throw new Exception('error with query: '. mysqli_error($conn));
+if(!$result) {
+    throw new Exception('error with query: '. mysqli_error($conn)); // if $result is undefined, throw exception
 }      
-
 $productData = [];
-while($row = mysqli_fetch_assoc($result)) { //send query to db
+while($row = mysqli_fetch_assoc($result)) {  // mysqli_fetch_assoc iterates through array until data runs out
     $productData[] = $row;    
-    // $price = $productData[0]['price'];  
+    $price = $productData[0]['price'];  // associative array inside associative array in $price
 }
-if(count($productData) === 0) { //check valid id
-  throw new Exception('Invalid ID');
+if($productData === []) { // if query id does not exist, result will not return anything. So this tests if the id is invalid
+    throw new Exception('Invalid ID:'. $id);
 }
-
-$transactionQuery = 'START TRANSACTION';
-$transaction = mysqli_query($conn, $transActionQuery);
-if(!$transaction) {
-    throw new Exception('Failed transaction: '. mysqli_error($conn)); //error when transaction fails
+$query2 = 'START TRANSACTION';
+$result2 = mysqli_query($conn, $query2);
+if(!$result2) {
+    throw new Exception('error with query 2: '. mysqli_error($conn)); // if $result is undefined, throw exception
 }      
-
-if($cartID === false) { //if there is no cart 
-  $insertQuery = "INSERT INTO cart 
-                  SET cart.`created` = NOW()"; //make cart
-
-  $cart = mysqli_query($conn, $insertQuery);
-  if(!$cart) {
-      throw new Exception('Failed to create cart: '. mysqli_error($conn));
-  }
-  if(mysqli_affected_rows($conn) !== 1) {
-      throw new Exception('Made changes to more than one row');
-  }
-  $cartID = mysqli_insert_id($conn);
-  $_SESSION['cartId'] = mysqli_insert_id($conn); //store it into both cartId and $_SESSION[‘cartId’]
-}
-
-$cartItemQuery = "INSERT INTO cartItems 
-                  SET cartItems.count = 1,
-                      cartItems.productID = {$id}, 
-                      cartItems.price = {$price}, 
-                      cartItems.added = NOW(), 
-                      cartItems.cartID = {$cartID} 
-                  ON DUPLICATE KEY UPDATE cartItems.count = cartItems.count + 1"; //query to add items
-
-$cartItem = mysqli_query($conn, $cartItemQuery);
-
-if(!$cartItem) {
-    throw new Exception('error with cartItem: '. mysqli_error($conn)); //check if item was added
+if($cartID === false) {
+    $insertQuery = "INSERT INTO `cart` SET `cart`.`created` = NOW()";  
+    $result3 = mysqli_query($conn, $insertQuery);
+    if(!$result3) {
+        throw new Exception('error with query 3: '. mysqli_error($conn)); // if $result is undefined, throw exception
+    }
+    if(mysqli_affected_rows($conn) !== 1) {
+        throw new Exception('affected rows should only be 1');
+    }
+    $cartID = mysqli_insert_id($conn);
+    $_SESSION['cartId'] = $cartID; 
+} 
+$cartItemQuery = "INSERT INTO `cartItems` SET `cartItems`.`count` = {$count}, `cartItems`.`productID` = {$id}, 
+                `cartItems`.`price` = {$price}, `cartItems`.`added` = NOW(), `cartItems`.`cartID` = {$cartID} 
+                ON DUPLICATE KEY UPDATE `cartItems`.`count` = `cartItems`.`count` + {$count}";
+$result4 = mysqli_query($conn, $cartItemQuery);
+if(!$result4) {
+    throw new Exception('error with query 4: '. mysqli_error($conn)); // if $result is undefined, throw exception
 }
 if(mysqli_affected_rows($conn) < 1) {
     $rollback = 'ROLLBACK';
     mysqli_query($conn, $rollback);
-    throw new Exceptioin('Normal');
+    throw new Exceptioin('now normal');
 } else {
     $commit = 'COMMIT';
     mysqli_query($conn, $commit);
 }
-
 ?>

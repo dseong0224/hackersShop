@@ -8,7 +8,6 @@ if(empty(INTERNAL)){
 
 if(empty($_SESSION['cartId'])) {
   print_r(getBodyData([]));
-  print("No cart for user");
   exit();
 } else {
   $cartId = intval($_SESSION['cartId']);

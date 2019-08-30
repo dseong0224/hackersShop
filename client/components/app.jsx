@@ -22,7 +22,7 @@ export default class App extends React.Component {
     this.resetCart = this.resetCart.bind(this);
     // this.placeOrder = this.placeOrder.bind(this);
     // this.deleteFromCart = this.deleteFromCart.bind(this);
-    // this.getCartItems = this.getCartItems.bind(this);
+    this.getCartItems = this.getCartItems.bind(this);
     // this.updateCart = this.updateCart.bind(this);
   }
   componentDidMount() {
@@ -45,26 +45,39 @@ export default class App extends React.Component {
       params
     } });
   }
+
   getCartItems() {
-    fetch('/api/cart.php')
+    fetch('/api/cart.php', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
       .then(response => response.json())
-      .then(cart => this.setState({ cart }))
+      .then(cart => {
+        // console.log('fetched cart: ', cart);
+
+        this.setState({ cart });
+      })
       .catch(error => {
         console.error('Failed to retrieve cart: ', error);
       });
   }
-  addToCart(product) {
-    if (!product.image) {
-      product.image = product.images[0];
-    }
 
+  addToCart(product) {
+    // if (!product.image) {
+    //   product.image = product.images[0];
+    // }
     fetch('/api/cart.php', {
       method: 'POST',
-      body: JSON.stringify(product),
+      body: JSON.stringify({
+        id: parseInt(product.id)
+      }),
       headers: { 'Content-Type': 'application/json' }
     });
-    // .then(response => response.json())
-    // .then(newItem => { this.setState({ cart: [...this.state.cart, newItem] }); })
+    // .then(response => {
+    //   console.log('item added to cart: ', response.json());
+    // response.json();
+    // })
+    // .then(newItem => { this.setState({ cart: [...this.state.cart, newItem] }); });
     // .catch(error => console.error(error));
   }
   placeOrder(orderObject) {
@@ -87,13 +100,13 @@ export default class App extends React.Component {
   }
   renderOption() {
     if (this.state.view.name === 'details') {
-      return <ProductDetails detailId={this.state.view.params.id} viewdetail={this.state.view.params} updateViewState={this.setView} handleAddToCart={this.addToCart} getCartItems={this.getCartItems}/>;
+      return <ProductDetails getCartItems={this.getCartItems} detailId={this.state.view.params.id} viewdetail={this.state.view.params} updateViewState={this.setView} handleAddToCart={this.addToCart}/>;
     }
     if (this.state.view.name === 'cart') {
-      return <CartSummary cartStateProps={this.state.cart} nameStateProps={this.state.view.name} updateViewState={this.setView}/>;
+      return <CartSummary getCartItems={this.getCartItems} cartStateProps={this.state.cart} nameStateProps={this.state.view.name} updateViewState={this.setView}/>;
     }
     if (this.state.view.name === 'checkout') {
-      return <CheckoutForm cartStateProps={this.state.cart} updateViewState={this.setView} resetCart={this.resetCart} placedOrderProps={this.placeOrder}/>;
+      return <CheckoutForm getCartItems={this.getCartItems} cartStateProps={this.state.cart} updateViewState={this.setView} resetCart={this.resetCart} placedOrderProps={this.placeOrder}/>;
     }
     return <ProductList productsFromApi={this.state.products} updateViewState={this.setView} viewdetail={this.state.view.params} handleAddToCart={this.addToCart}/>;
   }
