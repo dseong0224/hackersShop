@@ -2,7 +2,6 @@
 import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
-// import ProductListItem from './product-list-item';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
@@ -21,6 +20,10 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.resetCart = this.resetCart.bind(this);
+    // this.placeOrder = this.placeOrder.bind(this);
+    // this.deleteFromCart = this.deleteFromCart.bind(this);
+    // this.getCartItems = this.getCartItems.bind(this);
+    // this.updateCart = this.updateCart.bind(this);
   }
   componentDidMount() {
     this.getProducts();
@@ -33,7 +36,6 @@ export default class App extends React.Component {
         // const image = products.images[0];
         // console.log('fetched products: ', products);
         // products.mainImage = image;
-
         this.setState({ products });
       });
   }
@@ -46,7 +48,10 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart.php')
       .then(response => response.json())
-      .then(cart => this.setState({ cart }));
+      .then(cart => this.setState({ cart }))
+      .catch(error => {
+        console.error('Failed to retrieve cart: ', error);
+      });
   }
   addToCart(product) {
     if (!product.image) {
@@ -57,24 +62,24 @@ export default class App extends React.Component {
       method: 'POST',
       body: JSON.stringify(product),
       headers: { 'Content-Type': 'application/json' }
-    })
-      .then(response => response.json())
-      .then(newItem => { this.setState({ cart: [...this.state.cart, newItem] }); })
-      .catch(error => console.error(error));
+    });
+    // .then(response => response.json())
+    // .then(newItem => { this.setState({ cart: [...this.state.cart, newItem] }); })
+    // .catch(error => console.error(error));
   }
   placeOrder(orderObject) {
     fetch('/api/orders.php', {
       method: 'POST',
       body: JSON.stringify(orderObject),
       headers: { 'Content-Type': 'application/json' }
-    })
-      .then(response => response.json())
-      .then(orderObject => {
-        return (this.setState({
-          cart: [...this.state.cart, orderObject]
-        }));
-      })
-      .catch(error => console.error(error));
+    });
+    // .then(response => response.json())
+    // .then(orderObject => {
+    //   return (this.setState({
+    //     cart: [...this.state.cart, orderObject]
+    //   }));
+    // })
+    // .catch(error => console.error(error));
     this.setView('catalog', {});
   }
   resetCart() {
@@ -82,7 +87,7 @@ export default class App extends React.Component {
   }
   renderOption() {
     if (this.state.view.name === 'details') {
-      return <ProductDetails detailId={this.state.view.params.id} viewdetail={this.state.view.params} updateViewState={this.setView} handleAddToCart={this.addToCart}/>;
+      return <ProductDetails detailId={this.state.view.params.id} viewdetail={this.state.view.params} updateViewState={this.setView} handleAddToCart={this.addToCart} getCartItems={this.getCartItems}/>;
     }
     if (this.state.view.name === 'cart') {
       return <CartSummary cartStateProps={this.state.cart} nameStateProps={this.state.view.name} updateViewState={this.setView}/>;

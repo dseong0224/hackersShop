@@ -6,7 +6,7 @@ set_exception_handler('handleError');
 
 startUp();
 
-$db_conn = require_once('db_connection.php');
+require_once('db_connection.php');
 
 // print_r($_GET);
 
@@ -27,8 +27,14 @@ if (!empty($_GET["id"])) {
               FROM images AS i 
               JOIN products AS p 
                 ON p.id = i.product_id 
-             WHERE p.id= $id  
+             WHERE p.id= {$id}  
           GROUP BY p.id"; 
+
+  
+
+
+
+
 
   $result = mysqli_query($conn, $query);
 
@@ -36,8 +42,10 @@ if (!empty($_GET["id"])) {
     throw new Exception('error with query: '.mysqli_error($conn));
   }
 
+
   $row = mysqli_fetch_assoc($result);
   $row["images"] = explode(",", $row["images"]);
+
 
   print(json_encode($row));
 } else {

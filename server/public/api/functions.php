@@ -16,7 +16,8 @@ function startUp(){
 }
 function getBodyData($json){
   // $json_input = file_get_contents('php://input');
-  $input = json_decode($json);
+  $input = json_decode('$json');
+  print_r($input);
   return $input;
 }
 ?>
