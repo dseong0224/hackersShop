@@ -28,9 +28,19 @@ require_once('db_connection.php');
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method){
-case 'GET': require('cart_get.php');
+case 'GET': 
+http_response_code(200);
+require_once('cart_get.php');
 break;
-case 'POST': require('cart_post.php');
+case 'POST': 
+http_response_code(201);
+require_once('cart_post.php');
+break;
+case 'PUT': 
+require_once('cart_post.php');
+break;
+case 'DELETE': 
+require_once('cart_post.php');
 break;
 default:
 };
