@@ -4,7 +4,7 @@ require_once('functions.php');
 
 set_exception_handler('handleError');
 
-startUp();
+startup();
 
 require_once('db_connection.php');
 // print_r($_GET);
@@ -71,40 +71,7 @@ $result = mysqli_query($conn, $query);
     // index 0 because this returns an array with one object inside
   } else {
     print( json_encode($output));
-    // print( json_encode($output[0]));
-    // print( json_encode($output[1]));
-    // print( json_encode($output[2]));
-    // print( json_encode($output[3]));
-    // print( json_encode($output[4]));
-    // print( json_encode($output[5]));
-    // print( json_encode($output[6]));
-    // print( json_encode($output[7]));
-    // print( json_encode($output[8]));
-    // print( json_encode($output[9]));
-    // print( json_encode($output[10]));
-    // print( json_encode($output[11]));
   }
-  
-  // $query = "SELECT p.id AS `id`, 
-  //                  p.name AS `name`, 
-  //                  p.price AS `price`, 
-  //                  p.shortDescription AS `shortDescription`, 
-  //                  GROUP_CONCAT(i.image) AS `images`
-  //           FROM products AS ip 
-  //           JOIN images AS i 
-  //           ON p.id = i.product_id 
-  //           GROUP BY p.id";
-
-  // $result = mysqli_query($conn, $query);
-
-  // if (!$result) {
-  //   throw new Exception('error with query: '.mysqli_error($conn));
-  // }
-
-  // $row = mysqli_fetch_assoc($result);
-  // $row["images"] = explode(",", $row["images"]);
-
-
 ?>
 
 

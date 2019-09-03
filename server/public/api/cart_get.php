@@ -1,13 +1,13 @@
 <?php
 
 require_once('functions.php');
-if(empty(INTERNAL)){
-  print("NO DIRECT ACCESS");
-  exit();
-} 
+// if(!INTERNAL){
+//   print("NO DIRECT ACCESS");
+//   exit();
+// } 
 
 if(empty($_SESSION['cartId'])) {
-  print_r(getBodyData([]));
+  print_r(getBodyData());
   exit();
 } else {
   $cartId = intval($_SESSION['cartId']);
