@@ -4,15 +4,31 @@ require_once('functions.php');
 
 set_exception_handler('handleError');
 
-startUp();
+startup();
 
 require_once('db_connection.php');
-
 // print_r($_GET);
 
-if (!empty($_GET["id"])) {
+if (empty($_GET["id"])) {
+  // print_r($_GET["id"]);
 
-  $id = $_GET["id"];
+$query = "SELECT id, name, price, shortDescription, image FROM products";
+
+$result = mysqli_query($conn, $query);
+
+  if (!$result) {
+    throw new Exception('error with query: '.mysqli_error($conn));
+  }
+
+  $output = [];
+
+  while ($row = mysqli_fetch_assoc($result)) {
+  $output[] = $row;
+  }
+
+} else {
+
+$id = $_GET["id"];
   
   if(!is_numeric($id)){
     throw new Exception('id needs to be a number');
@@ -30,53 +46,32 @@ if (!empty($_GET["id"])) {
              WHERE p.id= {$id}  
           GROUP BY p.id"; 
 
-  
-
-
-
-
-
-  $result = mysqli_query($conn, $query);
+$result = mysqli_query($conn, $query);
 
   if (!$result) {
     throw new Exception('error with query: '.mysqli_error($conn));
   }
-
-
-  $row = mysqli_fetch_assoc($result);
-  $row["images"] = explode(",", $row["images"]);
-
-
-  print(json_encode($row));
-} else {
-  $query = "SELECT id, name, price, shortDescription, image FROM products";
-  // $query = "SELECT p.id AS `id`, 
-  //                  p.name AS `name`, 
-  //                  p.price AS `price`, 
-  //                  p.shortDescription AS `shortDescription`, 
-  //                  GROUP_CONCAT(i.image) AS `images`
-  //           FROM products AS ip 
-  //           JOIN images AS i 
-  //           ON p.id = i.product_id 
-  //           GROUP BY p.id";
-
-  $result = mysqli_query($conn, $query);
-
-  if (!$result) {
-    throw new Exception('error with query: '.mysqli_error($conn));
-  }
-
-  // $row = mysqli_fetch_assoc($result);
-  // $row["images"] = explode(",", $row["images"]);
 
   $output = [];
 
   while ($row = mysqli_fetch_assoc($result)) {
-    $output[] = $row;
+  $row["images"] = explode(",", $row["images"]);
+  $output[] = $row;
   }
-  
-  print(json_encode($output));
 }
+
+  if(count($output)===0){
+    throw new Exception('Invalid ID:'. $id);
+  }
+
+  // print( json_encode($output));
+
+  if(count($output) === 1) {
+    print(json_encode($output[0])); 
+    // index 0 because this returns an array with one object inside
+  } else {
+    print( json_encode($output));
+  }
 ?>
 
 

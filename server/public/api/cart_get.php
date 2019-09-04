@@ -1,18 +1,16 @@
 <?php
 
 require_once('functions.php');
-if(empty(INTERNAL)){
-  print("NO DIRECT ACCESS");
-  exit();
-} 
+// if(!INTERNAL){
+//   print("NO DIRECT ACCESS");
+//   exit();
+// } 
 
-if(empty($_SESSION['cartId'])) {
-  print_r(getBodyData([]));
-  print("No cart for user");
-  exit();
-} else {
-  $cartId = intval($_SESSION['cartId']);
-}
+// if(empty($_SESSION['cartId'])) {
+//   exit();
+// } else {
+//   $cartId = intval($_SESSION['cartId']);
+// }
 
 $query = "SELECT cartItems.price AS price, 
                  cartItems.count, 
@@ -29,11 +27,10 @@ while($row = mysqli_fetch_assoc($result)) {
 }
 
 if(count($output) === 0) {
+  // if($output === []){
   print("[]");
   exit();
 } 
 
-print(json_encode($data));
-
-
+print(json_encode($output));
 ?>

@@ -9,7 +9,7 @@ export default class CheckoutForm extends React.Component {
   placeOrder() {
     event.preventDefault();
     this.props.updateViewState('catalog', {});
-    this.props.resetCart();
+    this.props.emptyCart();
   }
 
   render() {

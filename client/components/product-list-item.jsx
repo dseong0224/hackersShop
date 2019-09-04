@@ -33,7 +33,9 @@ export default class ProductListItem extends React.Component {
           <div className="card-body">
             <div className="h6 mb-3">${(this.props.data.price / 100).toFixed(2)}</div>
             <button type="button" className="mr-1 ml-1 mb-2 btn  btn-outline-secondary" style={{ cursor: 'pointer' }} onClick = {this.handleClick}>View Detail</button>
-            <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" style={{ cursor: 'pointer' }} onClick = {this.callAddToCart}>Add To Cart</button>
+            {/* <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" style={{ cursor: 'pointer' }} onClick = {this.callAddToCart}>Add To Cart</button> */}
+            <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" style={{ cursor: 'pointer' }}>Add To Cart</button>
+
           </div>
         </div>
       </div>

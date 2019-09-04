@@ -46,21 +46,24 @@ export default class ProductDetails extends React.Component {
   }
 
   callAddToCart() {
-    if (this.state.product.images.length !== 1) {
-      // this.setState({
+    // if (this.state.product.images.length !== 1) {
+    // this.setState({
 
-      // })
-      // this.state.product['image'] = this.state.product['images'].slice(0, 1);
-    }
+    // })
+    // this.state.product['image'] = this.state.product['images'].slice(0, 1);
+    // }
 
     // console.log('Details add to cart:', this.state.product);
 
     const product = JSON.stringify(this.state.product);
 
-    this.props.handleAddToCart(JSON.parse(product));
-    setTimeout(() => {
-      this.props.getCartItems();
-    }, 100);
+    // this.props.handleAddToCart(JSON.parse(product));
+    this.props.handleAddToCart(product);
+
+    // setTimeout(() => {
+    this.props.getCartItems();
+
+    // }, 1000);
   }
 
   render() {
