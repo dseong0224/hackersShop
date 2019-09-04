@@ -10,7 +10,7 @@ $jsonBody = getBodyData();
 // $jsonBody = getBodyData($item);
 
 if($jsonBody->id) {
-    echo('jsonBody -> id');
+    echo($jsonBody -> id);
     $id = $jsonBody->id;
     if(intval($id) < 1) {
         throw new Exception('id must be greater than 0');
@@ -47,7 +47,7 @@ while($row = mysqli_fetch_assoc($result)) { //send query to db
 if(count($productData) === 0) { //check valid id
   throw new Exception('Invalid ID');
 }
-$transactionQuery = 'START TRANSACTION';
+$transActionQuery = 'START TRANSACTION';
 $transaction = mysqli_query($conn, $transActionQuery);
 if(!$transaction) {
     throw new Exception('Failed transaction: '. mysqli_error($conn)); //error when transaction fails
@@ -64,7 +64,7 @@ if($cartID === false) { //if there is no cart
       throw new Exception('Made changes to more than one row');
   }
   $cartID = mysqli_insert_id($conn);
-  $_SESSION['cartId'] = mysqli_insert_id($conn); //store it into both cartId and $_SESSION[‘cartId’]
+  $_SESSION['cartId'] = $cartID; //store it into both cartId and $_SESSION[‘cartId’]
 }
 $cartItemQuery = "INSERT INTO cartItems 
                   SET cartItems.count = 1,
