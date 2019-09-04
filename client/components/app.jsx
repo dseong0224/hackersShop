@@ -61,10 +61,12 @@ export default class App extends React.Component {
     fetch('/api/cart.php', {
       method: 'POST',
       body: JSON.stringify({
-        id: parseInt(product.id)
+        id: 8
       }),
       headers: { 'Content-Type': 'application/json' }
     })
+      .then(response => response.json())
+      // .then(console.log)
       .catch(error => {
         console.error('Post Error: ', error);
       });
