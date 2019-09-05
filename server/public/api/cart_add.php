@@ -1,4 +1,5 @@
 <?php
+
 require_once('functions.php');
 // if(!INTERNAL) {
 //     print("Direct access not allowed");
@@ -9,9 +10,9 @@ $jsonBody = getBodyData();
 // $item = file_get_contents('php://input');
 // $jsonBody = getBodyData($item);
 
-if($jsonBody->id) {
-    echo($jsonBody -> id);
-    $id = $jsonBody->id;
+if($jsonBody['id']) {
+    echo($jsonBody['id']);
+    $id = $jsonBody['id'];
     if(intval($id) < 1) {
         throw new Exception('id must be greater than 0');
     }
