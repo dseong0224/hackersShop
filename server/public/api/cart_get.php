@@ -1,10 +1,10 @@
 <?php
 
 require_once('functions.php');
-// if(!INTERNAL){
-//   print("NO DIRECT ACCESS");
-//   exit();
-// } 
+if(!INTERNAL){
+  print("NO DIRECT ACCESS");
+  exit();
+} 
 
 if(empty($_SESSION['cartId'])) {
   exit();

@@ -18,7 +18,6 @@ if(!function_exists('startup')){
 }
 if(!function_exists('getBodyData')){
   function getBodyData(){
-    // $input = json_decode("[{'id':'1','name':'Cooler Master Sk621','price':'11999','shortDescription':'60% Mechanical Keyboard with Cherry MX Low Profile Switches and Brushed Aluminum Design','image':'https:\/\/images-na.ssl-images-amazon.com\/images\/I\/61gIn%2Bsi2XL._SL1200_.jpg'}]");
     $input = json_decode(file_get_contents('php://input'), true);
 
     print_r($input);

@@ -10,7 +10,7 @@ export default class ProductList extends React.Component {
 
   makeProductList() {
     return this.props.productsFromApi.map(product => {
-      return <ProductListItem key={product.id} data={product} handleSetViewCallBack={this.props.updateViewState} handleAddToCart={this.props.handleAddToCart} getCartItems={this.props.getCartItems}/>;
+      return <ProductListItem key={product.id} data={product} handleSetViewCallBack={this.props.updateViewState} addToCart={this.props.addToCart} getCartItems={this.props.getCartItems}/>;
     });
   }
 

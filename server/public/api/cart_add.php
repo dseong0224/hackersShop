@@ -1,14 +1,12 @@
 <?php
 
 require_once('functions.php');
-// if(!INTERNAL) {
-//     print("Direct access not allowed");
-//     exit();
-// }
+if(!INTERNAL) {
+    print("Direct access not allowed");
+    exit();
+}
 
 $jsonBody = getBodyData();
-// $item = file_get_contents('php://input');
-// $jsonBody = getBodyData($item);
 
 if($jsonBody['id']) {
     echo($jsonBody['id']);

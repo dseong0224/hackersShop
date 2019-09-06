@@ -4,7 +4,7 @@ export default class ProductListItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.callAddToCart = this.callAddToCart.bind(this);
+    this.addToCart = this.addToCart.bind(this);
     this.imagecenter = {
       height: '30vh',
       display: 'flex',
@@ -18,8 +18,8 @@ export default class ProductListItem extends React.Component {
     this.props.handleSetViewCallBack('details', { id: this.props.data.id });
   }
 
-  callAddToCart() {
-    this.props.handleAddToCart(this.props.data);
+  addToCart() {
+    this.props.addToCart(this.props.data);
     this.props.getCartItems();
   }
   render() {
@@ -33,7 +33,7 @@ export default class ProductListItem extends React.Component {
           <div className="card-body">
             <div className="h6 mb-3">${(this.props.data.price / 100).toFixed(2)}</div>
             <button type="button" className="mr-1 ml-1 mb-2 btn  btn-outline-secondary" style={{ cursor: 'pointer' }} onClick = {this.handleClick}>View Detail</button>
-            <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" style={{ cursor: 'pointer' }} onClick = {this.callAddToCart}>Add To Cart</button>
+            <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" style={{ cursor: 'pointer' }} onClick = {this.addToCart}>Add To Cart</button>
           </div>
         </div>
       </div>
