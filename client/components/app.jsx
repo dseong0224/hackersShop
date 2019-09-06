@@ -61,7 +61,7 @@ export default class App extends React.Component {
     fetch('/api/cart.php', {
       method: 'POST',
       body: JSON.stringify({
-        id: 8
+        id: parseInt(product.id)
       }),
       headers: { 'Content-Type': 'application/json' }
     })
@@ -95,7 +95,7 @@ export default class App extends React.Component {
     if (this.state.view.name === 'checkout') {
       return <CheckoutForm getCartItems={this.getCartItems} cartStateProps={this.state.cart} updateViewState={this.setView} emptyCart={this.emptyCart} placedOrderProps={this.placeOrder}/>;
     }
-    return <ProductList productsFromApi={this.state.products} updateViewState={this.setView} viewdetail={this.state.view.params} handleAddToCart={this.addToCart}/>;
+    return <ProductList getCartItems={this.getCartItems} productsFromApi={this.state.products} updateViewState={this.setView} viewdetail={this.state.view.params} handleAddToCart={this.addToCart}/>;
   }
   render() {
     return (

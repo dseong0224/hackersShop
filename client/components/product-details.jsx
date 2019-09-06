@@ -57,13 +57,8 @@ export default class ProductDetails extends React.Component {
 
     const product = JSON.stringify(this.state.product);
 
-    // this.props.handleAddToCart(JSON.parse(product));
-    this.props.handleAddToCart(product);
-
-    // setTimeout(() => {
+    this.props.handleAddToCart(JSON.parse(product));
     this.props.getCartItems();
-
-    // }, 1000);
   }
 
   render() {

@@ -21,7 +21,7 @@ export default class Carousel extends React.Component {
 
   render() {
     return (
-      <div id="myCarousel" className="carousel slide" data-ride="carousel" style={{ height: '65vh' }}>
+      <div id="myCarousel" className="carousel slide" data-ride="carousel" style={{ height: '60vh' }}>
         <ol className="carousel-indicators" style={{ filter: 'invert(100%)' }}>
           <li data-target="#myCarousel" data-slide-to="0" className=""></li>
           <li data-target="#myCarousel" data-slide-to="1" className=""></li>
