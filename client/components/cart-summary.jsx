@@ -3,26 +3,26 @@ import CartSummaryItem from './cart-summary-item';
 
 export default function CartSummary(props) {
   function listCartItems() {
-    if (props.cartStateProps.length === 0) {
+    if (props.cart.length === 0) {
       // if(props.getCartItems.length === 0){
       return <h1>CART IS EMPTY...</h1>;
     }
-    return (props.cartStateProps.map(cartItem => {
-      return <CartSummaryItem key={cartItem.id} data={cartItem} viewCartItemDetails={props.updateViewState}/>;
+    return (props.cart.map(cartItem => {
+      return <CartSummaryItem key={cartItem.id} data={cartItem} viewCartItemDetails={props.setPage}/>;
     }));
   }
   function resetSetView() {
-    props.updateViewState('catalog', {});
+    props.setPage('catalog', {});
   }
   function viewCheckoutForm() {
-    props.updateViewState('checkout', {});
+    props.setPage('checkout', {});
   }
-  if (props.nameStateProps === 'cart') {
+  if (props.page === 'cart') {
     return (
       <div className="mt-4 mb-4 container">
         <div className="row">
           <div className="col-sm-7">
-            <div className="h3">CART <span className="h6 text-muted">19 item(s)</span></div>
+            <div className="h3">CART <span className="h6 text-muted">{props.cartQuantity} item(s)</span></div>
             <div className="container">
               <div className="mt-3 mb-3">
                 <hr/>
@@ -32,11 +32,11 @@ export default function CartSummary(props) {
           </div>
           <div className="col-sm-5">
             <h3> Summary </h3><hr/>
-            <div className="h6">Subtotal: <span className="float-right">{subTotalPrice(props.cartStateProps)}</span></div>
+            <div className="h6">Subtotal: <span className="float-right">{subTotalPrice(props.cart)}</span></div>
             <div className="h6"> Shipping: <span className="float-right">FREE</span></div>
-            <div className="h6 mb-4">Tax: <span className="float-right">{totalTax(props.cartStateProps)}</span></div>
+            <div className="h6 mb-4">Tax: <span className="float-right">{totalTax(props.cart)}</span></div>
             <hr/>
-            <div className="h5 mb-4">TOTAL : <span className="float-right">{totalPrice(props.cartStateProps)}</span></div>
+            <div className="h5 mb-4">TOTAL : <span className="float-right">{totalPrice(props.cart)}</span></div>
             <button type="button" className="btn btn-light border border-success btn-block" onClick={resetSetView} style={{ cursor: 'pointer' }}>BACK TO SHOPPING</button>
             <button type="button" className="btn btn-light border border-success btn-block" onClick={viewCheckoutForm} style={{ cursor: 'pointer' }}>CHECKOUT</button>
           </div>

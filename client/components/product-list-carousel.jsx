@@ -6,17 +6,16 @@ export default class Carousel extends React.Component {
     this.detailForProduct1 = this.detailForProduct1.bind(this);
     this.detailForProduct2 = this.detailForProduct2.bind(this);
     this.detailForProduct3 = this.detailForProduct3.bind(this);
-
   }
 
   detailForProduct1() {
-    this.props.handleSetViewCallBack('details', { id: this.props.products[0].id });
+    this.props.setPage('details', { id: this.props.products[0].id });
   }
   detailForProduct2() {
-    this.props.handleSetViewCallBack('details', { id: this.props.products[2].id });
+    this.props.setPage('details', { id: this.props.products[2].id });
   }
   detailForProduct3() {
-    this.props.handleSetViewCallBack('details', { id: this.props.products[5].id });
+    this.props.setPage('details', { id: this.props.products[5].id });
   }
 
   render() {

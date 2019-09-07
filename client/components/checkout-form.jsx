@@ -8,7 +8,7 @@ export default class CheckoutForm extends React.Component {
   }
   placeOrder() {
     event.preventDefault();
-    this.props.updateViewState('catalog', {});
+    this.props.setPage('catalog', {});
     this.props.emptyCart();
   }
 
@@ -23,16 +23,16 @@ export default class CheckoutForm extends React.Component {
             <div className="col-md-4 order-md-2 mb-4">
               <h4 className="d-flex justify-content-between align-items-center mb-3">
                 <span className="text-muted">Your cart</span>
-                <span className="badge badge-secondary badge-pill">{this.props.cartStateProps.length}</span>
+                <span className="badge badge-secondary badge-pill">{this.props.cart.length}</span>
               </h4>
               <ul className="list-group mb-3">
-                {this.props.cartStateProps.map(cartItem => {
+                {this.props.cart.map(cartItem => {
                   return <ListCartItems key={cartItem.id} data={cartItem}/>;
                 })
                 }
                 <li className="list-group-item d-flex justify-content-between">
                   <span>Total (USD)</span>
-                  <strong>{totalPrice(this.props.cartStateProps)}</strong>
+                  <strong>{totalPrice(this.props.cart)}</strong>
                 </li>
               </ul>
             </div>

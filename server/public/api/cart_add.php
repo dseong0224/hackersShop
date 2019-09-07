@@ -21,7 +21,9 @@ if($jsonBody['id']) {
     echo('no id in jsonBody');
     throw new Exception('id required to add to cart');
 } 
-
+if($jsonBody['count']) {
+    $count = $jsonBody['count'];
+}
 
 if(empty($_SESSION['cartId'])) {
     echo('cartID empty');
@@ -66,12 +68,12 @@ if($cartID === false) { //if there is no cart
   $_SESSION['cartId'] = $cartID; //store it into both cartId and $_SESSION[‘cartId’]
 }
 $cartItemQuery = "INSERT INTO cartItems 
-                  SET cartItems.count = 1,
+                  SET cartItems.count = {$count},
                       cartItems.productID = {$id}, 
                       cartItems.price = {$price}, 
                       cartItems.added = NOW(), 
                       cartItems.cartID = {$cartID} 
-                  ON DUPLICATE KEY UPDATE cartItems.count = cartItems.count + 1"; //query to add items
+                  ON DUPLICATE KEY UPDATE cartItems.count = cartItems.count + {$count}"; //query to add items
 $cartItem = mysqli_query($conn, $cartItemQuery);
 if(!$cartItem) {
     throw new Exception('error with cartItem: '. mysqli_error($conn)); //check if item was added

@@ -9,16 +9,15 @@ export default class ProductList extends React.Component {
   }
 
   makeProductList() {
-    return this.props.productsFromApi.map(product => {
-      return <ProductListItem key={product.id} data={product} handleSetViewCallBack={this.props.updateViewState} addToCart={this.props.addToCart} getCartItems={this.props.getCartItems}/>;
+    return this.props.productList.map(product => {
+      return <ProductListItem key={product.id} product={product} setPage={this.props.setPage} addToCart={this.props.addToCart} getCartItems={this.props.getCartItems}/>;
     });
   }
 
   render() {
     return (
       <React.Fragment>
-        <ListCarousel products={this.props.productsFromApi} handleSetViewCallBack={this.props.updateViewState}/>
-        {/* {console.log('this.props.productsFromApi: ', this.props.productsFromApi[5])} */}
+        <ListCarousel products={this.props.productList} setPage={this.props.setPage}/>
         <main>
           <div className="justify-content-md-center mr-1 ml-1 row">
             {this.makeProductList()}
