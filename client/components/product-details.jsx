@@ -6,23 +6,32 @@ export default class ProductDetails extends React.Component {
     super(props);
     this.state = {
       product: null,
-      cartQuantity: 0
+      cartQuantity: 1
     };
-    this.resetSetView = this.resetSetView.bind(this);
+    this.goToMainPage = this.goToMainPage.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.generateCarouselIndicator = this.generateCarouselIndicator.bind(this);
     this.carouselImagesArray = [];
     this.carouselIndicator = [];
   }
 
-  selectItem(id) {
+  selectedProduct(id) {
     fetch('/api/products.php?id=' + id)
       .then(response => response.json())
       .then(product => this.setState({ product }));
   }
 
   componentDidMount() {
-    this.selectItem(this.props.detailId);
+    this.selectedProduct(this.props.productId);
+  }
+
+  addToCart() {
+    const product = JSON.stringify(this.state.product);
+    this.props.addToCart(JSON.parse(product), JSON.parse(this.state.cartQuantity));
+    // this.props.getCartItems();
+    setTimeout(() => {
+      this.props.getCartItems();
+    }, 100);
   }
 
   makeCarousel() {
@@ -43,14 +52,8 @@ export default class ProductDetails extends React.Component {
     return this.carouselIndicator;
   }
 
-  resetSetView() {
-    this.props.updateViewState('catalog', {});
-  }
-
-  addToCart() {
-    const product = JSON.stringify(this.state.product);
-    this.props.addToCart(JSON.parse(product));
-    this.props.getCartItems();
+  goToMainPage() {
+    this.props.setPage('catalog', {});
   }
 
   render() {
@@ -89,7 +92,7 @@ export default class ProductDetails extends React.Component {
                   <i className="fas fa-plus-square pointer-hover ml-4 mr-3"></i>
                 </div>
                 <button type="button" className="mb-2 btn btn-lg btn-success" onClick={this.addToCart}>ADD TO CART</button>
-                <button type="button" className="d-block m-auto btn btn-lg btn-light border border-success" onClick={this.resetSetView}>TO CATALOG</button>
+                <button type="button" className="d-block m-auto btn btn-lg btn-light border border-success" onClick={this.goToMainPage}>TO CATALOG</button>
               </div>
             </div>
           </div><hr/>
