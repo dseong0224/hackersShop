@@ -1,6 +1,6 @@
 <?php
 
-// define("INTERNAL",true); 
+define("INTERNAL",true); 
 // to check if cart add is being called from whoever defined INTERNAL constant
 
 require_once('functions.php');
@@ -20,7 +20,6 @@ if ($method == 'GET') {
 
   http_response_code(201);
   require_once('cart_add.php');
-  // print($item);
 } else if ($method == 'PUT') {
   require_once('cart_update.php');
 } else if ($method == 'DELETE') {

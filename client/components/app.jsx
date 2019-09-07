@@ -15,7 +15,8 @@ export default class App extends React.Component {
         name: 'catalog',
         params: {}
       },
-      cart: []
+      cart: [],
+      cartQuantity: 0
     };
     this.setView = this.setView.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -57,11 +58,23 @@ export default class App extends React.Component {
       });
   }
 
-  addToCart(product) {
+  getCartQuantity() {
+    let cart = this.state.cart;
+    let cartQuantity = 0;
+    for (let cartItemIndex = 0; cartItemIndex < cart.length; cartItemIndex++) {
+      cartQuantity += parseInt(cart[cartItemIndex].quantity);
+    }
+    this.setState({
+      cartQuantity
+    });
+  }
+
+  addToCart(product, quantity) {
     fetch('/api/cart.php', {
       method: 'POST',
       body: JSON.stringify({
-        id: parseInt(product.id)
+        id: parseInt(product.id),
+        quantity
       }),
       headers: { 'Content-Type': 'application/json' }
     })
@@ -87,20 +100,20 @@ export default class App extends React.Component {
 
   renderPage() {
     if (this.state.view.name === 'details') {
-      return <ProductDetails getCartItems={this.getCartItems} detailId={this.state.view.params.id} viewdetail={this.state.view.params} updateViewState={this.setView} handleAddToCart={this.addToCart}/>;
+      return <ProductDetails getCartItems={this.getCartItems} detailId={this.state.view.params.id} viewdetail={this.state.view.params} updateViewState={this.setView} addToCart={this.addToCart}/>;
     }
     if (this.state.view.name === 'cart') {
-      return <CartSummary getCartItems={this.getCartItems} cartStateProps={this.state.cart} nameStateProps={this.state.view.name} updateViewState={this.setView}/>;
+      return <CartSummary getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cartStateProps={this.state.cart} nameStateProps={this.state.view.name} updateViewState={this.setView}/>;
     }
     if (this.state.view.name === 'checkout') {
-      return <CheckoutForm getCartItems={this.getCartItems} cartStateProps={this.state.cart} updateViewState={this.setView} emptyCart={this.emptyCart} placedOrderProps={this.placeOrder}/>;
+      return <CheckoutForm getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cartStateProps={this.state.cart} updateViewState={this.setView} emptyCart={this.emptyCart} placedOrderProps={this.placeOrder}/>;
     }
-    return <ProductList getCartItems={this.getCartItems} productsFromApi={this.state.products} updateViewState={this.setView} viewdetail={this.state.view.params} handleAddToCart={this.addToCart}/>;
+    return <ProductList getCartItems={this.getCartItems} productsFromApi={this.state.products} updateViewState={this.setView} viewdetail={this.state.view.params} addToCart={this.addToCart}/>;
   }
   render() {
     return (
       <div>
-        <Header numberOfItems={this.state.cart.length} updateViewState={this.setView}/>
+        <Header getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} updateViewState={this.setView}/>
         {this.renderPage()}
       </div>
     );

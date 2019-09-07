@@ -4,16 +4,18 @@ import ProductDetailCarouselImgs from './product-detail-carousel';
 export default class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { product: null };
+    this.state = {
+      product: null,
+      cartQuantity: 0
+    };
     this.resetSetView = this.resetSetView.bind(this);
-    this.callAddToCart = this.callAddToCart.bind(this);
+    this.addToCart = this.addToCart.bind(this);
     this.generateCarouselIndicator = this.generateCarouselIndicator.bind(this);
     this.carouselImagesArray = [];
     this.carouselIndicator = [];
   }
 
   selectItem(id) {
-    // console.log('Product ID:', id);
     fetch('/api/products.php?id=' + id)
       .then(response => response.json())
       .then(product => this.setState({ product }));
@@ -45,19 +47,9 @@ export default class ProductDetails extends React.Component {
     this.props.updateViewState('catalog', {});
   }
 
-  callAddToCart() {
-    // if (this.state.product.images.length !== 1) {
-    // this.setState({
-
-    // })
-    // this.state.product['image'] = this.state.product['images'].slice(0, 1);
-    // }
-
-    // console.log('Details add to cart:', this.state.product);
-
+  addToCart() {
     const product = JSON.stringify(this.state.product);
-
-    this.props.handleAddToCart(JSON.parse(product));
+    this.props.addToCart(JSON.parse(product));
     this.props.getCartItems();
   }
 
@@ -96,7 +88,7 @@ export default class ProductDetails extends React.Component {
                   1
                   <i className="fas fa-plus-square pointer-hover ml-4 mr-3"></i>
                 </div>
-                <button type="button" className="mb-2 btn btn-lg btn-success" onClick={this.callAddToCart}>ADD TO CART</button>
+                <button type="button" className="mb-2 btn btn-lg btn-success" onClick={this.addToCart}>ADD TO CART</button>
                 <button type="button" className="d-block m-auto btn btn-lg btn-light border border-success" onClick={this.resetSetView}>TO CATALOG</button>
               </div>
             </div>
