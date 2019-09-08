@@ -4,7 +4,6 @@ import CartSummaryItem from './cart-summary-item';
 export default function CartSummary(props) {
   function listCartItems() {
     if (props.cart.length === 0) {
-      // if(props.getCartItems.length === 0){
       return <h1>CART IS EMPTY...</h1>;
     }
     return (props.cart.map(cartItem => {

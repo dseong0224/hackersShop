@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductDetailCarouselImgs from './product-detail-carousel';
+import ProductQuantity from './product-quantity';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
@@ -11,8 +12,14 @@ export default class ProductDetails extends React.Component {
     this.goToMainPage = this.goToMainPage.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.generateCarouselIndicator = this.generateCarouselIndicator.bind(this);
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
     this.carouselImagesArray = [];
     this.carouselIndicator = [];
+  }
+
+  componentDidMount() {
+    this.selectedProduct(this.props.productId);
   }
 
   selectedProduct(id) {
@@ -21,17 +28,45 @@ export default class ProductDetails extends React.Component {
       .then(product => this.setState({ product }));
   }
 
-  componentDidMount() {
-    this.selectedProduct(this.props.productId);
+  getProductQuantity(id) {
+    // fetch('/api/cart_get.php?id=' + id)
+    //   .then(response => response.json())
+    //   .then(cartQuantity => this.setState({ cartQuantity }));
+    // const product = this.props.getCartItems();
+    // product.filter(product => product.id === id);
+    // console.log(product);
   }
 
   addToCart() {
-    const product = JSON.stringify(this.state.product);
-    this.props.addToCart(JSON.parse(product), JSON.parse(this.state.cartQuantity));
-    // this.props.getCartItems();
+    // const product = JSON.stringify(this.state.product);
+    // this.props.addToCart(JSON.parse(product), JSON.parse(this.state.cartQuantity));
+    this.props.addToCart(this.state.product, this.state.cartQuantity);
     setTimeout(() => {
       this.props.getCartItems();
+      // this.getProductQuantity(1);
     }, 100);
+  }
+
+  increment() {
+    let quantity = this.state.quantity;
+    let newQuantity = ++quantity;
+    this.setState({
+      quantity: newQuantity
+    });
+  }
+
+  decrement() {
+    let quantity = this.state.quantity;
+    let newQuantity = --quantity;
+    this.setState({
+      quantity: newQuantity
+    });
+  }
+
+  resetQuantity() {
+    this.setState({
+      quantity: 1
+    });
   }
 
   makeCarousel() {
@@ -85,11 +120,9 @@ export default class ProductDetails extends React.Component {
               <div className="text-center">
                 <h4 className="text-dark">{this.state.product.name}</h4>
                 <p className="lead mb-3">${(this.state.product.price / 100).toFixed(2)}</p>
-                <div className="h5 mb-1">Quantity:</div>
                 <div className="h4 mb-4 noselect">
-                  <i className="fas fa-minus-square pointer-hover ml-3 mr-4"></i>
-                  1
-                  <i className="fas fa-plus-square pointer-hover ml-4 mr-3"></i>
+                  {/* {console.log("cart quantity: ", this.getProductQuantity(this.props.productId))} */}
+                  <ProductQuantity cartQuantity={this.state.cartQuantity}/>
                 </div>
                 <button type="button" className="mb-2 btn btn-lg btn-success" onClick={this.addToCart}>ADD TO CART</button>
                 <button type="button" className="d-block m-auto btn btn-lg btn-light border border-success" onClick={this.goToMainPage}>TO CATALOG</button>

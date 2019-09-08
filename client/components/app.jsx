@@ -64,12 +64,12 @@ export default class App extends React.Component {
     let cart = this.state.cart;
     let cartQuantity = 0;
     for (let cartItemIndex = 0; cartItemIndex < cart.length; cartItemIndex++) {
+      // console.log("cart", cart);
       cartQuantity += parseInt(cart[cartItemIndex].count);
     }
     this.setState({
       cartQuantity
     });
-    // console.log("cart Quantity: ",this.state.cartQuantity);
   }
 
   addToCart(product, quantity) {
