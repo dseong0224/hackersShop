@@ -22,7 +22,7 @@ export default class App extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.emptyCart = this.emptyCart.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
-    this.deleteFromCart = this.deleteFromCart.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
     this.updateCart = this.updateCart.bind(this);
   }
 
@@ -104,7 +104,7 @@ export default class App extends React.Component {
       });
   }
 
-  deleteFromCart(product) {
+  removeFromCart(product) {
     fetch('/api/cart.php', {
       method: 'DELETE',
       body: JSON.stringify({
@@ -137,7 +137,7 @@ export default class App extends React.Component {
       return <ProductDetails getCartItems={this.getCartItems} productId={this.state.view.params.id} viewdetail={this.state.view.params} setPage={this.setPage} addToCart={this.addToCart}/>;
     }
     if (this.state.view.page === 'cart') {
-      return <CartSummary getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cart={this.state.cart} page={this.state.view.page} setPage={this.setPage} updateCart={this.updateCart}/>;
+      return <CartSummary getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cart={this.state.cart} page={this.state.view.page} setPage={this.setPage} remove={this.removeFromCart} updateCart={this.updateCart}/>;
     }
     if (this.state.view.page === 'checkout') {
       return <CheckoutForm getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cart={this.state.cart} setPage={this.setPage} emptyCart={this.emptyCart}/>;
