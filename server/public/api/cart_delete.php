@@ -18,19 +18,15 @@ if($jsonBody['id']) {
 } else {
     throw new Exception('id required to add to cart');
 } 
-if($jsonBody['updatedQuantity']) {
-    $updatedQuantity = $jsonBody['updatedQuantity'];
-}
 if(empty($_SESSION['cartId'])) {
-    print_r(getBodyData([]));
+    // print_r(getBodyData([]));
     exit();
 } else {
     $cartId = intval($_SESSION['cartId']);
 }
-$query  = "UPDATE cartItems SET cartItems.count = {$updatedQuantity} WHERE cartItems.productID = {$id}";
-
+$query = "DELETE from `cartItems` WHERE `cartItems`.`productID` = {$id}";
 $result = mysqli_query($conn, $query);
 if(!$result) {
-    throw new Exception('error with query: '. mysqli_error($conn)); 
+    throw new Exception('error with query: '. mysqli_error($conn));
 }     
 ?>

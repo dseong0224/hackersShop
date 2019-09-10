@@ -111,8 +111,8 @@ export default class ProductDetails extends React.Component {
                 <div className="h4 mb-4 noselect">
                   <ProductQuantity cartQuantity={this.state.cartQuantity} increment={this.increment} decrement={this.decrement}/>
                 </div>
-                <button type="button" className="mb-2 btn btn-lg btn-success" onClick={this.addToCart}>ADD TO CART</button>
-                <button type="button" className="d-block m-auto btn btn-lg btn-light border border-success" onClick={this.goToMainPage}>TO CATALOG</button>
+                <button type="button" className="mb-2 btn btn-block btn-success" onClick={this.addToCart}>ADD TO CART</button>
+                <button type="button" className="d-block m-auto btn btn-block btn-light border border-success" onClick={this.goToMainPage}>BACK TO CATALOG</button>
               </div>
             </div>
           </div><hr/>

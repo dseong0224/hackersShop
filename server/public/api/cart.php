@@ -12,7 +12,6 @@ require_once('db_connection.php');
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-
 if ($method == 'GET') {
   http_response_code(200);
   require_once('cart_get.php');
@@ -31,6 +30,5 @@ if ($method == 'GET') {
     'message' => "Cannot $method /api/cart.php"
   ]));
 }
-
 
 ?>
