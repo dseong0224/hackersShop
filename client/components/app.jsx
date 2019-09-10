@@ -22,6 +22,8 @@ export default class App extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.emptyCart = this.emptyCart.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
+    this.deleteFromCart = this.deleteFromCart.bind(this);
+    this.updateCart = this.updateCart.bind(this);
   }
 
   componentDidMount() {
@@ -69,7 +71,6 @@ export default class App extends React.Component {
     this.setState({
       cartQuantity
     });
-    // console.log("cart Quantity: ",this.state.cartQuantity);
   }
 
   addToCart(product, quantity) {
@@ -82,7 +83,37 @@ export default class App extends React.Component {
       headers: { 'Content-Type': 'application/json' }
     })
       .then(response => response.json())
-      // .then(console.log)
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
+  }
+
+  updateCart(product, quantity) {
+    fetch('/api/cart.php', {
+      method: 'PUT',
+      body: JSON.stringify({
+        id: parseInt(product.id),
+        updatedQuantity: quantity
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .catch(error => {
+        console.error('Post Error: ', error);
+      });
+  }
+
+  deleteFromCart(product) {
+    fetch('/api/cart.php', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        id: parseInt(product.id)
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .catch(error => {
         console.error('Post Error: ', error);
       });
@@ -106,7 +137,7 @@ export default class App extends React.Component {
       return <ProductDetails getCartItems={this.getCartItems} productId={this.state.view.params.id} viewdetail={this.state.view.params} setPage={this.setPage} addToCart={this.addToCart}/>;
     }
     if (this.state.view.page === 'cart') {
-      return <CartSummary getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cart={this.state.cart} page={this.state.view.page} setPage={this.setPage}/>;
+      return <CartSummary getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cart={this.state.cart} page={this.state.view.page} setPage={this.setPage} updateCart={this.updateCart}/>;
     }
     if (this.state.view.page === 'checkout') {
       return <CheckoutForm getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cart={this.state.cart} setPage={this.setPage} emptyCart={this.emptyCart}/>;
