@@ -28,46 +28,34 @@ export default class ProductDetails extends React.Component {
       .then(product => this.setState({ product }));
   }
 
-  getProductQuantity(id) {
-    // fetch('/api/cart_get.php?id=' + id)
-    //   .then(response => response.json())
-    //   .then(cartQuantity => this.setState({ cartQuantity }));
-    // const product = this.props.getCartItems();
-    // product.filter(product => product.id === id);
-    // console.log(product);
-  }
-
   addToCart() {
-    // const product = JSON.stringify(this.state.product);
-    // this.props.addToCart(JSON.parse(product), JSON.parse(this.state.cartQuantity));
     this.props.addToCart(this.state.product, this.state.cartQuantity);
     setTimeout(() => {
       this.props.getCartItems();
-      // this.getProductQuantity(1);
     }, 100);
   }
 
   increment() {
-    let quantity = this.state.quantity;
-    let newQuantity = ++quantity;
+    let cartQuantity = this.state.cartQuantity;
+    let newQuantity = ++cartQuantity;
     this.setState({
-      quantity: newQuantity
+      cartQuantity: newQuantity
     });
   }
 
   decrement() {
-    let quantity = this.state.quantity;
-    let newQuantity = --quantity;
+    let cartQuantity = this.state.cartQuantity;
+    let newQuantity = --cartQuantity;
     this.setState({
-      quantity: newQuantity
+      cartQuantity: newQuantity
     });
   }
 
-  resetQuantity() {
-    this.setState({
-      quantity: 1
-    });
-  }
+  // resetQuantity() {
+  //   this.setState({
+  //     cartQuantity: 1
+  //   });
+  // }
 
   makeCarousel() {
     for (let imageIndex = 1; imageIndex < this.state.product.images.length; imageIndex++) {
@@ -121,8 +109,7 @@ export default class ProductDetails extends React.Component {
                 <h4 className="text-dark">{this.state.product.name}</h4>
                 <p className="lead mb-3">${(this.state.product.price / 100).toFixed(2)}</p>
                 <div className="h4 mb-4 noselect">
-                  {/* {console.log("cart quantity: ", this.getProductQuantity(this.props.productId))} */}
-                  <ProductQuantity cartQuantity={this.state.cartQuantity}/>
+                  <ProductQuantity cartQuantity={this.state.cartQuantity} increment={this.increment} decrement={this.decrement}/>
                 </div>
                 <button type="button" className="mb-2 btn btn-lg btn-success" onClick={this.addToCart}>ADD TO CART</button>
                 <button type="button" className="d-block m-auto btn btn-lg btn-light border border-success" onClick={this.goToMainPage}>TO CATALOG</button>
