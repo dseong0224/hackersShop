@@ -90,7 +90,7 @@ export default class ProductDetails extends React.Component {
                   <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
                   {this.generateCarouselIndicator()}
                 </ol>
-                <div className="carousel-inner" style={{ height: '40vh', display: 'flex', alignItems: 'center' }}>
+                <div className="carousel-inner" style={{ height: '70vh', display: 'flex', alignItems: 'center' }}>
                   <div className="carousel-item active">
                     <img height="100%" src={this.state.product.images[0]} alt={this.state.product.name} className="card-img"/>
                   </div>

@@ -27,9 +27,9 @@ export default class productQuantity extends React.Component {
     return (
       <div className="quantity-input mb-3">
         <div className="h5 mb-1">Quantity:</div>
-        <ion-icon name="remove-circle-outline" type="button" onClick={this.decrement}>&mdash;</ion-icon>
+        <ion-icon name="remove-circle-outline" style={{ cursor: 'pointer' }} onClick={this.decrement}>&mdash;</ion-icon>
         <input className="quantity-input__screen text-center" type="text" value={this.props.cartQuantity} onChange={this.handleChange} style={{ width: '20%' }}/>
-        <ion-icon name="add-circle-outline" type="button" onClick={this.increment}>&#xff0b;</ion-icon>
+        <ion-icon name="add-circle-outline" style={{ cursor: 'pointer' }} onClick={this.increment}>&#xff0b;</ion-icon>
       </div>
     );
   }
