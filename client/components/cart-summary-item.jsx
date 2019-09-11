@@ -70,8 +70,8 @@ export default class CartSummaryItem extends React.Component {
         <div className="col-sm-7">
           <h6 type="button" onClick={this.viewDetails}>{this.props.data.name}</h6>
           <div className=" description-font text-muted">${(this.props.data.price / 100).toFixed(2)}</div>
-          <div className=" mb-3 noselect">Quantity:
-            <input className="quantity-input__screen text-center" type="number" value={this.state.cartQuantity} onChange={this.handleChange} style={{ width: '20%' }}/>
+          <div className="mb-3 noselect">Quantity:
+            <input className="quantity-input__screen text-center ml-1 mr-1" type="number" value={this.state.cartQuantity} onChange={this.handleChange} style={{ width: '20%' }}/>
             {/* <i className="fas fa-minus-square pointer-hover mr-2">-</i>
             <i className="fas fa-plus-square pointer-hover ml-2">+</i> */}
           </div>

@@ -125,11 +125,25 @@ export default class App extends React.Component {
       body: JSON.stringify(items),
       headers: { 'Content-Type': 'application/json' }
     });
-    this.setPage('catalog', {});
+    this.setState(
+      {
+        view: {
+          page: 'catalog',
+          params: {}
+        },
+        cart: [],
+        cartQuantity: 0
+      });
   }
 
   emptyCart() {
-    this.setState({ cart: [] });
+    let cartItems = this.state.cart;
+    for (let cartItemIndex = 0; cartItemIndex < cartItems.length; cartItemIndex++) {
+      this.removeFromCart(cartItems[cartItemIndex]);
+    }
+    setTimeout(() => {
+      this.getCartItems();
+    }, 100);
   }
 
   renderPage() {
