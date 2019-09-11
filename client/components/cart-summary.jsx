@@ -15,7 +15,7 @@ export default class CartSummary extends React.Component {
       return <h1>CART IS EMPTY...</h1>;
     }
     return (this.props.cart.map(cartItem => {
-      return <CartSummaryItem key={cartItem.id} data={cartItem} viewCartItemDetails={this.props.setPage} getCartItems={this.props.getCartItems} remove={this.props.remove} updateCart={this.props.updateCart}/>;
+      return <CartSummaryItem key={cartItem.id} data={cartItem} viewCartItemDetails={this.props.setPage} getCartItems={this.props.getCartItems} remove={this.props.remove} cartQuantity={this.props.cartQuantity} updateCart={this.props.updateCart}/>;
     }));
   }
   goToMainPage() {
