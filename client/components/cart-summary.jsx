@@ -2,9 +2,13 @@ import React from 'react';
 import CartSummaryItem from './cart-summary-item';
 
 export default class CartSummary extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.listCartItems = this.listCartItems.bind(this);
+    this.goToMainPage = this.goToMainPage.bind(this);
+    this.viewCheckoutForm = this.viewCheckoutForm.bind(this);
+    this.calculateSubTotal = this.calculateSubTotal.bind(this);
+  }
 
   listCartItems() {
     if (this.props.cart.length === 0) {
@@ -14,7 +18,7 @@ export default class CartSummary extends React.Component {
       return <CartSummaryItem key={cartItem.id} data={cartItem} viewCartItemDetails={this.props.setPage} getCartItems={this.props.getCartItems} remove={this.props.remove} updateCart={this.props.updateCart}/>;
     }));
   }
-  resetSetView() {
+  goToMainPage() {
     this.props.setPage('catalog', {});
   }
   viewCheckoutForm() {
@@ -22,7 +26,12 @@ export default class CartSummary extends React.Component {
   }
 
   calculateSubTotal() {
-    // console.log('hello');
+    let cart = this.props.cart;
+    let subTotal = 0;
+    for (let cartItemIndex = 0; cartItemIndex < cart.length; cartItemIndex++) {
+      subTotal += cart[cartItemIndex].count * cart[cartItemIndex].price;
+    }
+    return (subTotal / 100).toFixed(2);
   }
 
   render() {
@@ -31,7 +40,7 @@ export default class CartSummary extends React.Component {
         <div className="mt-4 mb-4 container">
           <div className="row">
             <div className="col-sm-7">
-              <div className="h3">CART <span className="h6 text-muted">{this.props.cartQuantity} item(s)</span></div>
+              <div className="h3">Cart <span className="h6 text-muted">{this.props.cartQuantity} item(s)</span></div>
               <div className="container">
                 <div className="mt-3 mb-3">
                   <hr/>
@@ -41,13 +50,13 @@ export default class CartSummary extends React.Component {
             </div>
             <div className="col-sm-5">
               <h3> Summary </h3><hr/>
-              <div className="h6">Subtotal: <span className="float-right">$10,000.00{this.calculateSubTotal()}</span></div>
+              <div className="h6">Subtotal: <span className="float-right">${this.calculateSubTotal()}</span></div>
               <div className="h6"> Shipping: <span className="float-right">FREE</span></div>
-              <div className="h6 mb-4">Tax: <span className="float-right">$1,500.00</span></div>
+              <div className="h6 mb-4">Tax: <span className="float-right">${(this.calculateSubTotal() * 0.15).toFixed(2)}</span></div>
               <hr/>
-              <div className="h5 mb-4">TOTAL : <span className="float-right">$11,500.00</span></div>
-              <button type="button" className="btn btn-light border border-success btn-block" onClick={this.resetSetView} style={{ cursor: 'pointer' }}>BACK TO SHOPPING</button>
-              <button type="button" className="btn btn-light border border-success btn-block" onClick={this.viewCheckoutForm} style={{ cursor: 'pointer' }}>CHECKOUT</button>
+              <div className="h5 mb-4">TOTAL : <span className="float-right">${(this.calculateSubTotal() * 1.15).toFixed(2)}</span></div>
+              <button type="button" className="btn btn-light border border-success btn-block" onClick={this.goToMainPage}>BACK TO SHOPPING</button>
+              <button type="button" className="btn btn-light border border-success btn-block" onClick={this.viewCheckoutForm}>CHECKOUT</button>
             </div>
           </div>
         </div>

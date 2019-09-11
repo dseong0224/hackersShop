@@ -5,7 +5,13 @@ export default class CheckoutForm extends React.Component {
   constructor(props) {
     super(props);
     this.placeOrder = this.placeOrder.bind(this);
+    this.goToCart = this.goToCart.bind(this);
   }
+
+  goToCart() {
+    this.props.setPage('cart', {});
+  }
+
   placeOrder() {
     event.preventDefault();
     this.props.setPage('catalog', {});
@@ -27,7 +33,7 @@ export default class CheckoutForm extends React.Component {
               </h4>
               <ul className="list-group mb-3">
                 {this.props.cart.map(cartItem => {
-                  return <ListCartItems key={cartItem.id} data={cartItem}/>;
+                  return <ListCartItems key={cartItem.id} cartItem={cartItem}/>;
                 })
                 }
                 <li className="list-group-item d-flex justify-content-between">
@@ -63,7 +69,7 @@ export default class CheckoutForm extends React.Component {
           </div>
           <div className="col-sm-5">
             <button type="button" className="btn btn-success btn-block" onClick={this.placeOrder}>PLACE ORDER</button>
-            <button type="button" className="btn btn-secondary border border-success btn-block">BACK TO CART</button>
+            <button type="button" className="btn btn-secondary border border-success btn-block" onClick={this.goToCart}>BACK TO CART</button>
           </div>
         </div>
       </div>
