@@ -6,6 +6,7 @@ export default class CheckoutForm extends React.Component {
     super(props);
     this.placeOrder = this.placeOrder.bind(this);
     this.goToCart = this.goToCart.bind(this);
+    this.calculateSubTotal = this.calculateSubTotal.bind(this);
   }
 
   goToCart() {
@@ -16,6 +17,16 @@ export default class CheckoutForm extends React.Component {
     event.preventDefault();
     this.props.setPage('catalog', {});
     this.props.emptyCart();
+  }
+
+  calculateSubTotal() {
+    let cart = this.props.cart;
+    let subTotal = 0;
+    for (let cartItemIndex = 0; cartItemIndex < cart.length; cartItemIndex++) {
+      subTotal += cart[cartItemIndex].count * cart[cartItemIndex].price;
+    }
+    subTotal = subTotal * 1.15;
+    return (subTotal / 100).toFixed(2);
   }
 
   render() {
@@ -29,7 +40,7 @@ export default class CheckoutForm extends React.Component {
             <div className="col-md-4 order-md-2 mb-4">
               <h4 className="d-flex justify-content-between align-items-center mb-3">
                 <span className="text-muted">Your cart</span>
-                <span className="badge badge-secondary badge-pill">{this.props.cart.length}</span>
+                <span className="badge badge-secondary badge-pill">{this.props.cartQuantity}</span>
               </h4>
               <ul className="list-group mb-3">
                 {this.props.cart.map(cartItem => {
@@ -38,7 +49,7 @@ export default class CheckoutForm extends React.Component {
                 }
                 <li className="list-group-item d-flex justify-content-between">
                   <span>Total (USD)</span>
-                  <strong>{totalPrice(this.props.cart)}</strong>
+                  <strong>$ {this.calculateSubTotal()}</strong>
                 </li>
               </ul>
             </div>
@@ -76,12 +87,4 @@ export default class CheckoutForm extends React.Component {
 
     );
   }
-}
-
-function totalPrice(cartItems) {
-  let priceTotal = 0;
-  for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
-    priceTotal += parseFloat(cartItems[priceIndex].price);
-  }
-  return '$' + (priceTotal * 1.09 / 100).toFixed(2);
 }
