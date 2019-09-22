@@ -21,9 +21,9 @@ $ npm install
 ```
 
 3. Start a dev environment with access to Apache and MySQL and:
-## Check that port is directed to 3000
-## Check that the root directory of the server is set to the public folder
-## Initiate the dev server
+* Check that port is directed to 3000
+* Check that the root directory of the server is set to the public folder
+* Initiate the dev server
 
 ```
 $ npm run dev
