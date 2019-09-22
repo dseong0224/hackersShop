@@ -51,16 +51,13 @@ export default class ProductDetails extends React.Component {
     });
   }
 
-  // resetQuantity() {
-  //   this.setState({
-  //     cartQuantity: 1
-  //   });
-  // }
-
   makeCarousel() {
     for (let imageIndex = 1; imageIndex < this.state.product.images.length; imageIndex++) {
       this.carouselImagesArray.push(
-        <ProductDetailCarouselImgs key={this.state.product.images[imageIndex]} imageSrc={this.state.product.images[imageIndex]} productName={this.state.product.name}/>
+        <ProductDetailCarouselImgs
+          key={this.state.product.images[imageIndex]}
+          imageSrc={this.state.product.images[imageIndex]}
+          productName={this.state.product.name}/>
       );
     }
     return this.carouselImagesArray;

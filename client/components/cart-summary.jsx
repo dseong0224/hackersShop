@@ -80,25 +80,3 @@ export default class CartSummary extends React.Component {
   }
 
 }
-
-// function subTotalPrice(cartItems) {
-//   let priceTotal = 0;
-//   for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
-//     priceTotal += parseFloat(cartItems[priceIndex].price);
-//   }
-//   return '$' + (priceTotal / 100).toFixed(2);
-// }
-// function totalTax(cartItems) {
-//   let priceTotal = 0;
-//   for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
-//     priceTotal += parseFloat(cartItems[priceIndex].price);
-//   }
-//   return '$' + (priceTotal * 0.9 / 1000).toFixed(2);
-// }
-// function totalPrice(cartItems) {
-//   let priceTotal = 0;
-//   for (var priceIndex = 0; priceIndex < cartItems.length; priceIndex++) {
-//     priceTotal += parseFloat(cartItems[priceIndex].price);
-//   }
-//   return '$' + (priceTotal * 1.09 / 100).toFixed(2);
-// }
