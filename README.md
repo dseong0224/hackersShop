@@ -15,7 +15,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. Fork this repo and clone your fork from the terminal.
 
 ```
-$ git clone https://github.com/[user_name]/hackersshop.git
+$ git clone https://github.com/[user_name]/hackersShop.git
 ```
 
 2. Navigate into the cloned directory and install the necessary dependencies.
