@@ -2,6 +2,9 @@
 
 hacker/'s Shop is a full stack LAMP shopping cart simulation app. It is a single-page React application and operates through dynamic PHP API. The app provides user with the ability to add keyboards and mice to their cart from a catalog, update the quantity of each item in the cart and delete selected items from the cart.
 
+*Live Demo: [hackersshop.danielcseong.com](hackersshop.danielcseong.com)
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
