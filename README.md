@@ -4,6 +4,7 @@ hacker/'s Shop is a full stack LAMP shopping cart simulation app. It is a single
 
 *Live Demo: [hackersshop.danielcseong.com](hackersshop.danielcseong.com)
 
+![]()
 
 ## Getting Started
 
