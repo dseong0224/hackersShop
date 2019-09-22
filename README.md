@@ -45,6 +45,6 @@ $ npm run dev
 
 Please feel free to fork this repo, make changes, submit pull requests, and send suggestions to dseongdev@gmail.com to make this app better.
 
-## Authors
+## Author
 
 * **Daniel Seong** - *Initial work* - [dseong0224](https://github.com/dseong0224)
