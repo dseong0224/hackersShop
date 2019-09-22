@@ -20,4 +20,4 @@ $ npm run dev
 Go to localhost:3000 and enjoy 😃
 
 Contributing
-Please feel free to fork this repo, make changes, submit pull requests, and send suggestions to billyhkim.dev@gmail.com to make this app better.
+Please feel free to fork this repo, make changes, submit pull requests, and send suggestions to dseongdev@gmail.com to make this app better.
