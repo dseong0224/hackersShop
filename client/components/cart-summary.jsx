@@ -5,7 +5,7 @@ export default class CartSummary extends React.Component {
   constructor(props) {
     super(props);
     this.listCartItems = this.listCartItems.bind(this);
-    this.goToMainPage = this.goToMainPage.bind(this);
+    this.viewCatalog = this.viewCatalog.bind(this);
     this.viewCheckoutForm = this.viewCheckoutForm.bind(this);
     this.calculateSubTotal = this.calculateSubTotal.bind(this);
   }
@@ -26,7 +26,7 @@ export default class CartSummary extends React.Component {
       );
     }));
   }
-  goToMainPage() {
+  viewCatalog() {
     this.props.setPage('catalog', {});
   }
   viewCheckoutForm() {
@@ -63,7 +63,7 @@ export default class CartSummary extends React.Component {
               <div className="h6 mb-4">Tax: <span className="float-right">${(this.calculateSubTotal() * 0.15).toFixed(2)}</span></div>
               <hr/>
               <div className="h5 mb-4">TOTAL : <span className="float-right">${(this.calculateSubTotal() * 1.15).toFixed(2)}</span></div>
-              <button type="button" className="btn btn-light border border-success btn-block" onClick={this.goToMainPage}>BACK TO SHOPPING</button>
+              <button type="button" className="btn btn-light border border-success btn-block" onClick={this.viewCatalog}>BACK TO SHOPPING</button>
               <button type="button" className="btn btn-light border border-success btn-block" onClick={this.viewCheckoutForm}>CHECKOUT</button>
             </div>
           </div>

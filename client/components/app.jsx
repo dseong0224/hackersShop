@@ -12,7 +12,7 @@ export default class App extends React.Component {
       products: [],
       view: {
         page: 'catalog',
-        params: {}
+        product: {}
       },
       cart: [],
       cartQuantity: 0
@@ -38,10 +38,10 @@ export default class App extends React.Component {
       });
   }
 
-  setPage(page, params) {
+  setPage(page, product) {
     this.setState({ view: {
       page,
-      params
+      product
     } });
   }
 
@@ -128,7 +128,7 @@ export default class App extends React.Component {
       {
         view: {
           page: 'catalog',
-          params: {}
+          product: {}
         },
         cart: [],
         cartQuantity: 0
@@ -147,22 +147,51 @@ export default class App extends React.Component {
 
   renderPage() {
     if (this.state.view.page === 'details') {
-      return <ProductDetails getCartItems={this.getCartItems} productId={this.state.view.params.id} viewdetail={this.state.view.params} setPage={this.setPage} addToCart={this.addToCart}/>;
+      return (
+        <ProductDetails // shows detail for selected item
+          productId={this.state.view.product.id}
+          setPage={this.setPage}
+          addToCart={this.addToCart}
+          getCartItems={this.getCartItems}/>);
     }
     if (this.state.view.page === 'cart') {
-      return <CartSummary getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cart={this.state.cart} page={this.state.view.page} setPage={this.setPage} removeItemFromCart={this.removeItemFromCart} updateCart={this.updateCart}/>;
+      return (
+        <CartSummary
+          cart={this.state.cart}
+          getCartItems={this.getCartItems}
+          cartQuantity={this.state.cartQuantity}
+          page={this.state.view.page}
+          setPage={this.setPage}
+          removeItemFromCart={this.removeItemFromCart}
+          updateCart={this.updateCart}/>);
     }
     if (this.state.view.page === 'checkout') {
-      return <CheckoutForm getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} cart={this.state.cart} setPage={this.setPage} emptyCart={this.emptyCart}/>;
+      return (
+        <CheckoutForm
+          getCartItems={this.getCartItems}
+          cartQuantity={this.state.cartQuantity}
+          cart={this.state.cart}
+          setPage={this.setPage}
+          emptyCart={this.emptyCart}/>);
     }
-    return <ProductList getCartItems={this.getCartItems} productList={this.state.products} setPage={this.setPage} viewdetail={this.state.view.params} addToCart={this.addToCart}/>;
+    return (
+      <ProductList
+        getCartItems={this.getCartItems}
+        productList={this.state.products}
+        setPage={this.setPage}
+        viewProduct={this.state.view.product}
+        addToCart={this.addToCart}/>);
   }
+
   render() {
     return (
-      <div>
-        <Header getCartItems={this.getCartItems} cartQuantity={this.state.cartQuantity} setPage={this.setPage}/>
+      <React.Fragment>
+        <Header
+          getCartItems={this.getCartItems}
+          cartQuantity={this.state.cartQuantity}
+          setPage={this.setPage}/>
         {this.renderPage()}
-      </div>
+      </React.Fragment>
     );
   }
 }

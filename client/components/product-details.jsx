@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductDetailCarouselImgs from './product-detail-carousel';
+import ProductDetailCarousel from './product-detail-carousel';
 import ProductQuantity from './product-quantity';
 
 export default class ProductDetails extends React.Component {
@@ -9,20 +9,17 @@ export default class ProductDetails extends React.Component {
       product: null,
       cartQuantity: 1
     };
-    this.goToMainPage = this.goToMainPage.bind(this);
+    this.viewCatalog = this.viewCatalog.bind(this);
     this.addToCart = this.addToCart.bind(this);
-    this.generateCarouselIndicator = this.generateCarouselIndicator.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
-    this.carouselImagesArray = [];
-    this.carouselIndicator = [];
   }
 
   componentDidMount() {
-    this.selectedProduct(this.props.productId);
+    this.selectProduct(this.props.productId);
   }
 
-  selectedProduct(id) {
+  selectProduct(id) {
     fetch('/api/products.php?id=' + id)
       .then(response => response.json())
       .then(product => this.setState({ product }));
@@ -51,28 +48,7 @@ export default class ProductDetails extends React.Component {
     });
   }
 
-  makeCarousel() {
-    for (let imageIndex = 1; imageIndex < this.state.product.images.length; imageIndex++) {
-      this.carouselImagesArray.push(
-        <ProductDetailCarouselImgs
-          key={this.state.product.images[imageIndex]}
-          imageSrc={this.state.product.images[imageIndex]}
-          productName={this.state.product.name}/>
-      );
-    }
-    return this.carouselImagesArray;
-  }
-
-  generateCarouselIndicator() {
-    for (let carouselIndex = 1; carouselIndex < this.state.product.images.length; carouselIndex++) {
-      this.carouselIndicator.push(
-        <li data-target="#myCarousel" data-slide-to= "{carouselIndex}"></li>
-      );
-    }
-    return this.carouselIndicator;
-  }
-
-  goToMainPage() {
+  viewCatalog() {
     this.props.setPage('catalog', {});
   }
 
@@ -82,34 +58,23 @@ export default class ProductDetails extends React.Component {
         <div className="mt-3 mb-5 container">
           <div className="row">
             <div className="col-sm-7">
-              <div id="myCarousel" className="carousel slide" data-ride="carousel">
-                <ol className="carousel-indicators" style={{ filter: 'invert(100%)' }}>
-                  <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-                  {this.generateCarouselIndicator()}
-                </ol>
-                <div className="carousel-inner" style={{ height: '70vh', display: 'flex', alignItems: 'center' }}>
-                  <div className="carousel-item active">
-                    <img height="100%" src={this.state.product.images[0]} alt={this.state.product.name} className="card-img"/>
-                  </div>
-                  {this.makeCarousel()}
-                </div>
-                <a className="carousel-control-prev" href="#myCarousel" data-slide="prev" style={{ filter: 'invert(100%)' }}>
-                  <span className="carousel-control-prev-icon"></span>
-                </a>
-                <a className="carousel-control-next" href="#myCarousel" data-slide="next" style={{ filter: 'invert(100%)' }}>
-                  <span className="carousel-control-next-icon"></span>
-                </a>
-              </div>
+              <ProductDetailCarousel
+                key = {this.state.product.id}
+                images = {this.state.product.images}
+                name = {this.state.product.name}/>
             </div>
             <div className="m-auto col-sm-5">
               <div className="text-center">
                 <h4 className="text-dark">{this.state.product.name}</h4>
                 <p className="lead mb-3">${(this.state.product.price / 100).toFixed(2)}</p>
                 <div className="h4 mb-4 noselect">
-                  <ProductQuantity cartQuantity={this.state.cartQuantity} increment={this.increment} decrement={this.decrement}/>
+                  <ProductQuantity
+                    cartQuantity={this.state.cartQuantity}
+                    increment={this.increment}
+                    decrement={this.decrement}/>
                 </div>
                 <button type="button" className="mb-2 btn btn-block btn-success" onClick={this.addToCart}>ADD TO CART</button>
-                <button type="button" className="d-block m-auto btn btn-block btn-light border border-success" onClick={this.goToMainPage}>BACK TO CATALOG</button>
+                <button type="button" className="d-block m-auto btn btn-block btn-light border border-success" onClick={this.viewCatalog}>BACK TO CATALOG</button>
               </div>
             </div>
           </div><hr/>
