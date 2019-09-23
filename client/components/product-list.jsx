@@ -22,15 +22,11 @@ export default class ProductList extends React.Component {
   render() {
     return (
       <React.Fragment>
-
         <ListCarousel products={this.props.productList} setPage={this.props.setPage}/>
-        <main>
-          <div className="justify-content-md-center mr-1 ml-1 row">
-            {this.makeProductList()}
-          </div>
-        </main>
+        <div className="justify-content-md-center mr-1 ml-1 row">
+          {this.makeProductList()}
+        </div>
       </React.Fragment>
-
     );
   }
 
