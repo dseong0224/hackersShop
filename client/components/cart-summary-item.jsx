@@ -9,7 +9,7 @@ export default class CartSummaryItem extends React.Component {
     this.viewProducts = this.viewProducts.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateCart = this.updateCart.bind(this);
-    this.remove = this.remove.bind(this);
+    this.removeItemFromCart = this.removeItemFromCart.bind(this);
   }
 
   componentDidMount() {
@@ -37,9 +37,9 @@ export default class CartSummaryItem extends React.Component {
     }, 100);
   }
 
-  remove() {
+  removeItemFromCart() {
     let product = this.props.data;
-    this.props.remove(product);
+    this.props.removeItemFromCart(product);
     setTimeout(() => {
       this.props.getCartItems();
     }, 100);
@@ -57,7 +57,7 @@ export default class CartSummaryItem extends React.Component {
           </div>
           <div>
             <button type="button" className="btn btn-light mr-1 ml-1 mb-2" role="button" onClick={this.updateCart}>Edit</button>
-            <button type="button" className="btn btn-light mr-1 ml-1 mb-2" role="button" onClick={this.remove}>Remove</button>
+            <button type="button" className="btn btn-light mr-1 ml-1 mb-2" role="button" onClick={this.removeItemFromCart}>Remove</button>
           </div>
         </div>
       </div>
