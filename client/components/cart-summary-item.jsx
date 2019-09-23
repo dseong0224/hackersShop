@@ -6,7 +6,7 @@ export default class CartSummaryItem extends React.Component {
     this.state = {
       cartQuantity: 0
     };
-    this.viewDetails = this.viewDetails.bind(this);
+    this.viewProducts = this.viewProducts.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateCart = this.updateCart.bind(this);
     this.remove = this.remove.bind(this);
@@ -16,7 +16,7 @@ export default class CartSummaryItem extends React.Component {
     this.getProductQuantity(this.props.data.id);
   }
 
-  viewDetails() {
+  viewProducts() {
     this.props.viewCartItemDetails('details', { id: this.props.data.id });
   }
 
@@ -48,9 +48,9 @@ export default class CartSummaryItem extends React.Component {
   render() {
     return (
       <div className="row align-items-center mt-1 mb-1">
-        <img style={{ 'maxWidth': '200px', cursor: 'pointer' }} src={this.props.data.image} className="card-img" alt={this.props.data.name} onClick={this.viewDetails}/>
+        <img style={{ 'maxWidth': '200px', cursor: 'pointer' }} src={this.props.data.image} className="card-img" alt={this.props.data.name} onClick={this.viewProducts}/>
         <div className="col-sm-7">
-          <h6 onClick={this.viewDetails} style={{ cursor: 'pointer' }}>{this.props.data.name}</h6>
+          <h6 onClick={this.viewProducts} style={{ cursor: 'pointer' }}>{this.props.data.name}</h6>
           <div className=" description-font text-muted">${(this.props.data.price / 100).toFixed(2)}</div>
           <div className="mb-3 noselect">Quantity:
             <input className="quantity-input__screen text-center ml-1 mr-1" type="number" value={this.state.cartQuantity} onChange={this.handleChange} style={{ width: '20%' }}/>
