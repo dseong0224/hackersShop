@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductDetailCarousel from './product-detail-carousel';
+import ProductDetailConfirmationModal from './product-detail-confirmation-modal';
 import ProductQuantity from './product-quantity';
 
 export default class ProductDetails extends React.Component {
@@ -73,8 +74,15 @@ export default class ProductDetails extends React.Component {
                     increment={this.increment}
                     decrement={this.decrement}/>
                 </div>
-                <button type="button" className="mb-2 btn btn-block btn-success" onClick={this.addToCart}>ADD TO CART</button>
-                <button type="button" className="d-block m-auto btn btn-block btn-light border border-success" onClick={this.viewCatalog}>BACK TO CATALOG</button>
+                <ProductDetailConfirmationModal
+                  name={this.state.product.name}
+                  image = {this.state.product.images[0]}
+                  price={this.state.product.price}
+                  cartQuantity={this.state.cartQuantity}
+                  setPage={this.props.setPage}
+                  viewCatalog={this.viewCatalog}
+                  addToCart={this.addToCart}/>
+                <button type="button" className="d-block m-auto btn btn-block btn-light border border-success" onClick = {this.viewCatalog}>BACK TO CATALOG</button>
               </div>
             </div>
           </div><hr/>
