@@ -60,9 +60,9 @@ export default class CartSummary extends React.Component {
               <h3> Summary </h3><hr/>
               <div className="h6">Subtotal: <span className="float-right">${this.calculateSubTotal()}</span></div>
               <div className="h6"> Shipping: <span className="float-right">FREE</span></div>
-              <div className="h6 mb-4">Tax: <span className="float-right">${(this.calculateSubTotal() * 0.15).toFixed(2)}</span></div>
+              <div className="h6 mb-4">Tax: <span className="float-right">${(this.calculateSubTotal() * 0.0725).toFixed(2)}</span></div>
               <hr/>
-              <div className="h5 mb-4">TOTAL : <span className="float-right">${(this.calculateSubTotal() * 1.15).toFixed(2)}</span></div>
+              <div className="h5 mb-4">TOTAL : <span className="float-right">${(this.calculateSubTotal() * 1.0725).toFixed(2)}</span></div>
               <button type="button" className="btn btn-light border border-success btn-block" onClick={this.viewCatalog}>BACK TO SHOPPING</button>
               <button type="button" className="btn btn-light border border-success btn-block" onClick={this.viewCheckoutForm}>CHECKOUT</button>
             </div>
