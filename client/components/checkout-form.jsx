@@ -1,4 +1,5 @@
 import React from 'react';
+import CheckoutConfirmationModal from './checkout-form-confirmation-modal';
 import ListCartItems from './checkout-summary';
 
 export default class CheckoutForm extends React.Component {
@@ -79,7 +80,7 @@ export default class CheckoutForm extends React.Component {
             </div>
           </div>
           <div className="col-sm-5">
-            <button type="button" className="btn btn-success btn-block" onClick={this.placeOrder}>PLACE ORDER</button>
+            <CheckoutConfirmationModal placeOrder={this.props.placeOrder}/>
             <button type="button" className="btn btn-secondary border border-success btn-block" onClick={this.goToCart}>BACK TO CART</button>
           </div>
         </div>
