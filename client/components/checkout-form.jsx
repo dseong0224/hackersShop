@@ -88,11 +88,17 @@ export default class CheckoutForm extends React.Component {
               <div className="h6 description-font mb-4">Tax:<span className="float-right">$ {(this.calculateSubTotal() * 0.0725).toFixed(2)}</span></div>
               <hr/>
               <span className="h4 card-font mb-4 text-orange">TOTAL : <span className="float-right">$ {(this.calculateSubTotal() * 1.0725).toFixed(2)}</span></span>
-              <CheckoutConfirmationModal placeOrder={this.props.placeOrder} orderTotal={(this.calculateSubTotal() * 1.0725).toFixed(2)} cartQuantity={this.props.cartQuantity}/>
+              <CheckoutConfirmationModal
+                placeOrder={this.props.placeOrder}
+                orderTotal={(this.calculateSubTotal() * 1.0725).toFixed(2)}
+                cartQuantity={this.props.cartQuantity}
+                cart={this.props.cart}/>
               <button type="button" className="btn btn-secondary border border-success btn-block mt-2 mb-2" onClick={this.goToCart}>BACK TO CART</button>
               <ul className="list-group mb-3">
                 {this.props.cart.map(cartItem => {
-                  return <ListCartItems key={cartItem.id} cartItem={cartItem}/>;
+                  return <ListCartItems
+                    key={cartItem.id}
+                    cartItem={cartItem}/>;
                 })
                 }
               </ul>
