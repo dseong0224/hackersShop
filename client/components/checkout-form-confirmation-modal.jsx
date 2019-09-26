@@ -27,7 +27,12 @@ export default class CheckoutConfirmationModal extends React.Component {
                 <div className="h3 card-font text-center font-weight-bold">Order Total: ${this.props.orderTotal}</div>
                 <div className="description-font text-muted text-center">{this.props.cartQuantity} item(s)</div>
                 <div className="align-content-center">
-                  <CheckoutModalItem/>
+                  {this.props.cart.map(cartItem => {
+                    return <CheckoutModalItem
+                      key={cartItem.id}
+                      cartItem={cartItem}/>;
+                  })
+                  }
                 </div>
               </div>
               <div className="card-font modal-footer">
