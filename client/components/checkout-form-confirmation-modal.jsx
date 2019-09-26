@@ -5,7 +5,11 @@ import CheckoutModalItem from './checkout-form-confirmation-modal-item';
 export default class CheckoutConfirmationModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = [];
+    this.resetCart = this.resetCart.bind(this);
+  }
+
+  resetCart() {
+    this.props.emptyCart();
   }
 
   render() {
@@ -37,7 +41,7 @@ export default class CheckoutConfirmationModal extends React.Component {
               </div>
               <div className="card-font modal-footer">
                 <button type="button" className="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                <button type="button" className="btn btn-success">SUBMIT</button></div>
+                <button type="button" className="btn btn-success" data-dismiss="modal" onClick={this.resetCart}>SUBMIT</button></div>
             </div>
           </div>
         </div>

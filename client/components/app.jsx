@@ -143,6 +143,7 @@ export default class App extends React.Component {
     setTimeout(() => {
       this.getCartItems();
     }, 100);
+    this.setPage('catalog', {});
   }
 
   renderPage() {

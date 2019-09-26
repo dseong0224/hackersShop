@@ -43,7 +43,7 @@ export default class CheckoutForm extends React.Component {
                 <div className="h4 card-header">Shipping</div>
                 <div className="card-body">
                   <p className="card-text"> Shipping Info </p>
-                  <div className="mb-1 input-group"><input placeholder="Name" name="name" type="text" className="form-control"/></div>
+                  <div className="mb-1 input-group"><input placeholder="Name" name="name" onKeyPress={(event.charCode > 64 && event.charCode < 91)} type="text" className="form-control"/></div>
                   <div className="mb-1 input-group"><input placeholder="Shipping Address" name="address" type="text" className="form-control"/></div>
                 </div>
               </div>
@@ -64,7 +64,8 @@ export default class CheckoutForm extends React.Component {
                 placeOrder={this.props.placeOrder}
                 orderTotal={(this.calculateSubTotal() * 1.0725).toFixed(2)}
                 cartQuantity={this.props.cartQuantity}
-                cart={this.props.cart}/>
+                cart={this.props.cart}
+                emptyCart={this.props.emptyCart}/>
               <button type="button" className="btn btn-secondary border border-success btn-block mt-2 mb-2" onClick={this.goToCart}>BACK TO CART</button>
               <ul className="list-group mb-3">
                 {this.props.cart.map(cartItem => {
