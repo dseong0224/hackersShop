@@ -31,14 +31,6 @@ export default class ProductListItemConfirmationModal extends React.Component {
                 <h5 className="modal-title" id="exampleModalLongTitle">
                   ITEM ADDED
                 </h5>
-                {/* <div className="row align-items-center mt-1 mb-1">
-                  <img src={this.props.image} alt={this.props.name} className="col-sm-5 mx-auto"/>
-                  <div className="col-sm-7 card-font">
-                    <div className="h5">{this.props.name}</div>
-                    <div className="h6 description-font text-muted">${(this.props.price / 100).toFixed(2)}</div>
-                    <div className="h5 mb-3">Quantity: 1</div>
-                  </div>
-                </div> */}
               </div>
               <div className="modal-footer">
                 <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" data-dismiss="modal">Continue Shopping</button>

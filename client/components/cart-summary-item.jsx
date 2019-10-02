@@ -1,4 +1,5 @@
 import React from 'react';
+import RemoveProductConfirmationModal from './remove-product-modal';
 
 export default class CartSummaryItem extends React.Component {
   constructor(props) {
@@ -53,11 +54,17 @@ export default class CartSummaryItem extends React.Component {
           <h6 onClick={this.viewProducts} style={{ cursor: 'pointer' }}>{this.props.data.name}</h6>
           <div className=" description-font text-muted">${(this.props.data.price / 100).toFixed(2)}</div>
           <div className="mb-3 noselect">Quantity:
-            <input className="quantity-input__screen text-center ml-1 mr-1" type="number" value={this.state.cartQuantity} onChange={this.handleChange} style={{ width: '20%' }}/>
+            <input className="quantity-input__screen text-center ml-1 mr-1" type="number" min="1" value={this.state.cartQuantity} onChange={this.handleChange} style={{ width: '20%' }}/>
           </div>
           <div>
             <button type="button" className="btn btn-light mr-1 ml-1 mb-2" role="button" onClick={this.updateCart}>Edit</button>
-            <button type="button" className="btn btn-light mr-1 ml-1 mb-2" role="button" onClick={this.removeItemFromCart}>Remove</button>
+            <RemoveProductConfirmationModal
+              key={this.props.data.name.id}
+              removeItemFromCart={this.removeItemFromCart}
+              name={this.props.data.name}
+              price={this.props.data.price}
+              quantity={this.state.cartQuantity}
+              image={this.props.data.image}/>
           </div>
         </div>
       </div>

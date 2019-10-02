@@ -15,7 +15,7 @@ export default class CheckoutConfirmationModal extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <button type="button" className="btn btn-success btn-block mt-2 mb-2" data-toggle="modal" data-target="#exampleModalLong" onClick={this.props.placeOrder}>PLACE ORDER</button>
+        <button type="button" className="btn btn-success btn-block mt-2 mb-2" data-toggle="modal" data-target="#exampleModalLong" disabled={this.props.disabled} onClick={this.props.placeOrder}>PLACE ORDER</button>
         <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
