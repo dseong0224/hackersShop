@@ -82,7 +82,7 @@ export default class CheckoutForm extends React.Component {
                 <div className="h4 card-header">Shipping</div>
                 <div className="card-body">
                   <p className="card-text"> Shipping Info </p>
-                  <input placeholder="Name" name="name" type="text" className="form-control" onChange={this.handleNameChange}/>
+                  <input placeholder="First Last" name="name" type="text" className="form-control" onChange={this.handleNameChange}/>
                   <input placeholder="Shipping Address" name="address" type="text" className="form-control" onChange={this.handleAddressChange}/>
                 </div>
               </div>
@@ -90,7 +90,7 @@ export default class CheckoutForm extends React.Component {
                 <div className="h4 card-header">Payment</div>
                 <div className="card-body">
                   <p className="card-text"> Credit Card </p>
-                  <input className="mb-1 form-control" id="cc-number" placeholder="1234567891011121" name="creditCardNumber" type="text" pattern="\d*" maxLength="16" onChange={this.handleCreditCardNumberChange}/>
+                  <input className="mb-1 form-control" id="cc-number" placeholder="16 digit credit card number" name="creditCardNumber" type="text" pattern="\d*" maxLength="16" onChange={this.handleCreditCardNumberChange}/>
                   <div className="mb-1 input-group form-control"><input placeholder="Exp. Date" name="expDate" type="month" onChange={this.handleExpDateChange}/></div>
                   <input className="mb-1 form-control" placeholder="cvv" name="cvv" type="text" pattern="\d*" maxLength="4" onChange={this.handleCvvChange}/>
                 </div>

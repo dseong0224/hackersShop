@@ -20,7 +20,7 @@ export default class RemoveProductConfirmationModal extends React.Component {
               </div>
               <div className="modal-body">
                 <h5 className="modal-title" id="exampleModalLongTitle">
-                  Item Removed
+                  Item:
                 </h5>
                 <div className="row align-items-center mt-1 mb-1">
                   <img src={this.props.image} alt={this.props.name} className="col-sm-5 mx-auto"/>
@@ -32,8 +32,8 @@ export default class RemoveProductConfirmationModal extends React.Component {
                 </div>
               </div>
               <div className="modal-footer">
+                <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" data-dismiss="modal">Go To Cart</button>
                 <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" data-dismiss="modal" onClick={this.props.removeItemFromCart}>Remove</button>
-                <button type="button" className="mr-1 ml-1 mb-2 btn btn-outline-secondary" data-dismiss="modal" >Go To Cart</button>
               </div>
             </div>
           </div>
