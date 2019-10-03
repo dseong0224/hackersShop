@@ -28,6 +28,7 @@ export default class CartSummaryItem extends React.Component {
   }
 
   handleChange(event) {
+    event.preventDefault();
     this.setState({ cartQuantity: event.target.value });
   }
 
