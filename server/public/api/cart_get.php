@@ -1,9 +1,8 @@
 <?php
 require_once('functions.php');
-// if(!INTERNAL){
-//   print("NO DIRECT ACCESS");
-//   exit();
-// } 
+if(!INTERNAL){
+  die("NO DIRECT ACCESS");
+} 
 
 if(empty($_SESSION['cartId'])) {
   exit();
@@ -21,6 +20,13 @@ if (empty($_GET["id"])) {
             INNER JOIN products ON cartItems.productID = products.id";
 
   $result = mysqli_query($conn, $query);
+
+  if(!$result){
+    //throw error
+  }
+
+
+
   $output = [];
   while($row = mysqli_fetch_assoc($result)) {  
       $output[] = $row;                           
