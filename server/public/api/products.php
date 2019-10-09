@@ -14,6 +14,8 @@ if (empty($_GET["id"])) {
 
 $query = "SELECT id, name, price, shortDescription, image FROM products";
 
+//or ( SELECT url FROM images WHERE productID = p.id LIMIT 1) instead of image  
+
 $result = mysqli_query($conn, $query);
 
   if (!$result) {
