@@ -23,9 +23,9 @@ export default class Carousel extends React.Component {
 
       <div id="carouselExampleCaptions" className="carousel slide text-dark" data-ride="carousel">
         <ol className="carousel-indicators">
-          <li data-target="#carouselExampleCaptions" data-slide-to="0" className="active"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+          <li data-target="#carouselExampleCaptions" style={{ filter: 'invert(100%)' }} data-slide-to="0" className="active"></li>
+          <li data-target="#carouselExampleCaptions" style={{ filter: 'invert(100%)' }} data-slide-to="1"></li>
+          <li data-target="#carouselExampleCaptions" style={{ filter: 'invert(100%)' }} data-slide-to="2"></li>
         </ol>
         <div className="carousel-inner d-flex justify-content-around">
           <div className="carousel-item active">
@@ -54,12 +54,12 @@ export default class Carousel extends React.Component {
           </div>
         </div>
         <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="sr-only">Previous</span>
+          <span className="carousel-control-prev-icon" aria-hidden="true" style={{ filter: 'invert(100%)' }}></span>
+          <span className="sr-only"></span>
         </a>
         <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="sr-only">Next</span>
+          <span className="carousel-control-next-icon" aria-hidden="true" style={{ filter: 'invert(100%)' }}></span>
+          <span className="sr-only"></span>
         </a>
       </div>
 
