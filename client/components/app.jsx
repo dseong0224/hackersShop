@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from './header';
-import ProductList from './product-list';
-import ProductDetails from './product-details';
-import CartSummary from './cart-summary';
-import CheckoutForm from './checkout-form';
+import ProductList from './product-list/product-list';
+import ProductDetails from './product-details/product-details';
+import CartSummary from './cart-summary/cart-summary';
+import CheckoutForm from './checkout/checkout-form';
 
 export default class App extends React.Component {
   constructor(props) {

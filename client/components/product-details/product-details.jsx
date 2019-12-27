@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductDetailCarousel from './product-detail-carousel';
 import ProductDetailConfirmationModal from './product-detail-confirmation-modal';
-import ProductQuantity from './product-quantity';
+import ProductQuantity from '../product-quantity';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
